@@ -1,194 +1,197 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Setor de Paisagismo • Portal Inteligente</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 
-    <!-- SEO Básico -->
-    <meta name="description" content="Sistema inteligente de identificação ambiental via QR Code para o Setor de Paisagismo.">
-    <meta name="theme-color" content="#00ffc6">
+<title>Setor de Paisagismo • Portal Inteligente</title>
 
-    <!-- Fonte futurista -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Orbitron', system-ui, sans-serif;
-        }
+<!-- SEO Básico -->
+<meta name="description" content="Sistema inteligente de identificação ambiental via QR Code para o Setor de Paisagismo.">
+<meta name="theme-color" content="#00ffc6">
 
-        body {
-            background: radial-gradient(circle at top, #031f1d, #000);
-            color: #eaffff;
-            min-height: 100vh;
-            overflow-x: hidden;
-            line-height: 1.5;
-        }
+<!-- Fonte futurista -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
-        /* ===== LOADING ===== */
-        #loader {
-            position: fixed;
-            inset: 0;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            z-index: 9999;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', system-ui, sans-serif;
+}
 
-        .spinner {
-            width: 90px;
-            height: 90px;
-            border: 6px solid rgba(0,255,198,0.2);
-            border-top: 6px solid #00ffc6;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 25px;
-        }
+body {
+    background: radial-gradient(circle at top, #031f1d, #000);
+    color: #eaffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.5;
+}
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+/* ===== LOADING ===== */
+#loader {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 9999;
+}
 
-        /* ===== HERO ===== */
-        header {
-            text-align: center;
-            padding: clamp(60px, 8vw, 100px) 20px 40px;
-        }
+.spinner {
+    width: 90px;
+    height: 90px;
+    border: 6px solid rgba(0,255,198,0.2);
+    border-top: 6px solid #00ffc6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 25px;
+}
 
-        header h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            letter-spacing: 5px;
-            color: #00ffc6;
-            text-shadow: 0 0 25px rgba(0,255,198,0.6);
-        }
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
 
-        header p {
-            max-width: 720px;
-            margin: 20px auto;
-            opacity: 0.85;
-            font-size: 1.05rem;
-        }
+/* ===== HERO ===== */
+header {
+    text-align: center;
+    padding: clamp(60px, 8vw, 100px) 20px 40px;
+}
 
-        /* ===== FEATURES ===== */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 22px;
-            padding: 40px clamp(20px, 6vw, 60px);
-        }
+header h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: 5px;
+    color: #00ffc6;
+    text-shadow: 0 0 25px rgba(0,255,198,0.6);
+}
 
-        .feature {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(0,255,198,0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 18px;
-            padding: 22px;
-            text-align: center;
-            box-shadow: 0 0 25px rgba(0,255,198,0.12);
-            transition: 0.3s ease;
-            font-size: 0.95rem;
-        }
+header p {
+    max-width: 720px;
+    margin: 20px auto;
+    opacity: 0.85;
+    font-size: 1.05rem;
+}
 
-        .feature:hover {
-            transform: translateY(-6px) scale(1.03);
-            box-shadow: 0 0 40px rgba(0,255,198,0.35);
-        }
+/* ===== FEATURES ===== */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+    padding: 40px clamp(20px, 6vw, 60px);
+}
 
-        /* ===== PORTAL ===== */
-        .portal {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 40px;
-            padding: 40px clamp(20px, 6vw, 60px) 80px;
-        }
+.feature {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(0,255,198,0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    padding: 22px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(0,255,198,0.12);
+    transition: 0.3s ease;
+    font-size: 0.95rem;
+}
 
-        .portal-card {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(0,255,198,0.25);
-            backdrop-filter: blur(12px);
-            border-radius: 24px;
-            padding: 35px 30px;
-            text-align: center;
-            box-shadow: 0 0 40px rgba(0,255,198,0.15);
-            transition: 0.4s ease;
-        }
+.feature:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 0 40px rgba(0,255,198,0.35);
+}
 
-        .portal-card:hover {
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 0 0 60px rgba(0,255,198,0.4);
-        }
+/* ===== PORTAL ===== */
+.portal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+    padding: 40px clamp(20px, 6vw, 60px) 80px;
+}
 
-        .portal-card.stone {
-            border-color: rgba(127,208,255,0.4);
-            box-shadow: 0 0 40px rgba(127,208,255,0.2);
-        }
+.portal-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(0,255,198,0.25);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 35px 30px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0,255,198,0.15);
+    transition: 0.4s ease;
+}
 
-        .icon {
-            font-size: 60px;
-            margin-bottom: 15px;
-        }
+.portal-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 0 60px rgba(0,255,198,0.4);
+}
 
-        .portal-card h2 {
-            color: #00ffc6;
-            margin-bottom: 10px;
-            font-size: 1.4rem;
-        }
+.portal-card.stone {
+    border-color: rgba(127,208,255,0.4);
+    box-shadow: 0 0 40px rgba(127,208,255,0.2);
+}
 
-        .portal-card.stone h2 {
-            color: #7fd0ff;
-        }
+.icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
 
-        .portal-card p {
-            font-size: 0.95rem;
-            opacity: 0.85;
-            margin-bottom: 25px;
-        }
+.portal-card h2 {
+    color: #00ffc6;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
 
-        .portal-btn {
-            display: inline-block;
-            padding: 14px 28px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: bold;
-            letter-spacing: 1px;
-            background: linear-gradient(135deg, #00ffc6, #00bfa5);
-            color: #003333;
-            box-shadow: 0 0 18px rgba(0,255,198,0.7);
-            transition: 0.3s ease;
-        }
+.portal-card.stone h2 {
+    color: #7fd0ff;
+}
 
-        .portal-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 35px rgba(0,255,198,1);
-        }
+.portal-card p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    margin-bottom: 25px;
+}
 
-        .portal-btn.stone {
-            background: linear-gradient(135deg, #7fd0ff, #4db8ff);
-            color: #002033;
-            box-shadow: 0 0 18px rgba(127,208,255,0.7);
-        }
+.portal-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #00ffc6, #00bfa5);
+    color: #003333;
+    box-shadow: 0 0 18px rgba(0,255,198,0.7);
+    transition: 0.3s ease;
+}
 
-        .portal-btn.stone:hover {
-            box-shadow: 0 0 35px rgba(127,208,255,1);
-        }
+.portal-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 35px rgba(0,255,198,1);
+}
 
-        /* ===== FOOTER ===== */
-        footer {
-            text-align: center;
-            padding: 30px 15px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            opacity: 0.7;
-            font-size: 0.85rem;
-        }
-    </style>
+.portal-btn.stone {
+    background: linear-gradient(135deg, #7fd0ff, #4db8ff);
+    color: #002033;
+    box-shadow: 0 0 18px rgba(127,208,255,0.7);
+}
+
+.portal-btn.stone:hover {
+    box-shadow: 0 0 35px rgba(127,208,255,1);
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 30px 15px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    opacity: 0.7;
+    font-size: 0.85rem;
+}
+</style>
 </head>
+
 <body>
 
 <!-- LOADING -->
@@ -215,19 +218,21 @@
 </section>
 
 <main class="portal" aria-label="Acesso rápido">
+
     <div class="portal-card">
         <div class="icon">🌳</div>
         <h2>Ipê Amarelo</h2>
         <p>Informações botânicas, curiosidades, fotos e dados ambientais da árvore.</p>
-        <a href="ipe.html" class="portal-btn">Acessar</a>
+        <a href="./ipe.html" class="portal-btn">Acessar</a>
     </div>
 
     <div class="portal-card stone">
         <div class="icon">🪨</div>
         <h2>Monumento de Pedra</h2>
         <p>História, processo de montagem, fotos e vídeos documentais.</p>
-        <a href="pedra.html" class="portal-btn stone">Acessar</a>
+        <a href="./pedra.html" class="portal-btn stone">Acessar</a>
     </div>
+
 </main>
 
 <footer>
@@ -235,13 +240,13 @@
 </footer>
 
 <script>
-    // Remove loader após carregamento
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            const loader = document.getElementById('loader');
-            if (loader) loader.style.display = 'none';
-        }, 1000);
-    });
+// Remove loader após carregamento
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const loader = document.getElementById('loader');
+        if (loader) loader.style.display = 'none';
+    }, 1000);
+});
 </script>
 
 </body>
