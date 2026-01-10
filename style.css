@@ -1,34 +1,107 @@
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f2f6f3;
     margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #0f2027, #000);
+    color: #e0f7fa;
+    overflow-x: hidden;
+}
+
+/* Fundo animado */
+.bg-anim {
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(120deg, rgba(0,255,170,0.05), transparent),
+        linear-gradient(240deg, rgba(0,150,255,0.05), transparent);
+    animation: bgMove 12s infinite alternate;
+    z-index: -1;
+}
+
+@keyframes bgMove {
+    from { transform: translateX(-30px); }
+    to { transform: translateX(30px); }
 }
 
 header {
-    background: #2e7d32;
-    color: white;
-    padding: 20px;
     text-align: center;
+    padding: 40px 20px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+    color: #00ffc6;
+    text-shadow: 0 0 15px rgba(0,255,198,0.6);
+}
+
+header p {
+    opacity: 0.8;
 }
 
 main {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 30px;
 }
 
 .card {
-    background: white;
-    width: 300px;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(0,255,198,0.2);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    padding: 25px;
+    position: relative;
+    transition: 0.4s ease;
+    box-shadow: 0 0 25px rgba(0,255,198,0.1);
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 0 40px rgba(0,255,198,0.4);
+}
+
+.card h2 {
+    margin-top: 10px;
+    color: #00ffc6;
+}
+
+.card ul {
+    padding-left: 20px;
+}
+
+.card li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.tag {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: #00ffc6;
+    color: #003333;
+    padding: 4px 12px;
+    font-size: 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0,255,198,0.6);
+}
+
+.tag.stone {
+    background: #7fd0ff;
+    color: #002233;
+    box-shadow: 0 0 10px rgba(127,208,255,0.6);
 }
 
 footer {
     text-align: center;
-    padding: 10px;
-    color: #555;
+    padding: 20px;
+    font-size: 12px;
+    opacity: 0.6;
 }
