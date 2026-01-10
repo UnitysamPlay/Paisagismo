@@ -1,23 +1,94 @@
-.gallery {
+/* ===== PORTAL ===== */
+
+.hero {
+    text-align: center;
+    padding: 70px 20px 40px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    letter-spacing: 6px;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: auto;
+    font-size: 1.1rem;
+    opacity: 0.85;
+}
+
+.portal {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    padding: 40px;
 }
 
-.gallery img {
-    width: 100%;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
+.portal-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(0,255,198,0.25);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 35px 30px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0,255,198,0.15);
+    transition: 0.4s ease;
 }
 
-.gallery img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(0,255,198,0.5);
+.portal-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 0 60px rgba(0,255,198,0.4);
 }
 
-video {
-    width: 100%;
-    border-radius: 12px;
-    margin-top: 10px;
+.portal-card.stone {
+    border-color: rgba(127,208,255,0.4);
+    box-shadow: 0 0 40px rgba(127,208,255,0.2);
+}
+
+.icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.portal-card h2 {
+    color: #00ffc6;
+    margin-bottom: 10px;
+}
+
+.portal-card.stone h2 {
+    color: #7fd0ff;
+}
+
+.portal-card p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    margin-bottom: 25px;
+}
+
+.portal-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #00ffc6, #00bfa5);
+    color: #003333;
+    box-shadow: 0 0 18px rgba(0,255,198,0.7);
+    transition: 0.3s ease;
+}
+
+.portal-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 35px rgba(0,255,198,1);
+}
+
+.portal-btn.stone {
+    background: linear-gradient(135deg, #7fd0ff, #4db8ff);
+    color: #002033;
+    box-shadow: 0 0 18px rgba(127,208,255,0.7);
+}
+
+.portal-btn.stone:hover {
+    box-shadow: 0 0 35px rgba(127,208,255,1);
 }
