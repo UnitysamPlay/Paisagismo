@@ -1,212 +1,233 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Setor de Paisagismo • Portal Inteligente</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Setor de Paisagismo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Acessibilidade -->
-<meta name="color-scheme" content="dark light">
+    <!-- Fonte futurista -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
-<!-- QR Code Lib -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
 
-<style>
+        body {
+            background: radial-gradient(circle at top, #031f1d, #000);
+            color: #eaffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-/* ================= BASE ================= */
-*{box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
-body{margin:0;background:#050b10;color:#eafff8;overflow-x:hidden}
+        /* ===== LOADING ===== */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
 
-/* ================= LOADER ================= */
-#loader{
-position:fixed;inset:0;background:#050b10;display:flex;align-items:center;justify-content:center;z-index:9999
-}
-.loader-ring{
-width:120px;height:120px;border-radius:50%;border:4px solid rgba(0,255,198,.2);
-border-top:4px solid #00ffc6;animation:spin 1.2s linear infinite
-}
-@keyframes spin{to{transform:rotate(360deg)}}
+        .spinner {
+            width: 90px;
+            height: 90px;
+            border: 6px solid rgba(0,255,198,0.2);
+            border-top: 6px solid #00ffc6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 25px;
+        }
 
-/* ================= BACKGROUND ================= */
-.bg-anim{position:fixed;inset:0;background:radial-gradient(circle at top,#0f2027,#000);z-index:-1}
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
 
-/* ================= HEADER ================= */
-header{text-align:center;padding:60px 20px}
-header h1{font-size:3rem;color:#00ffc6;letter-spacing:5px;text-shadow:0 0 20px rgba(0,255,198,.7)}
-header p{opacity:.85}
+        /* ===== HERO ===== */
+        header {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
 
-/* ================= CONTROLS ================= */
-.controls{display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap}
-.controls button{padding:8px 14px;border-radius:20px;border:none;cursor:pointer;background:#00ffc6;color:#003;font-weight:bold}
+        header h1 {
+            font-size: 3rem;
+            letter-spacing: 5px;
+            color: #00ffc6;
+            text-shadow: 0 0 25px rgba(0,255,198,0.6);
+        }
 
-/* ================= QR FIXO ================= */
-.qr-container {
-    margin-top: 30px;
-    text-align: center;
-}
+        header p {
+            max-width: 720px;
+            margin: 20px auto;
+            opacity: 0.85;
+            font-size: 1.05rem;
+        }
 
-.qr-container h3 {
-    font-weight: normal;
-    opacity: 0.85;
-    margin-bottom: 12px;
-}
+        /* ===== FEATURES ===== */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            padding: 40px 60px;
+        }
 
-.qr-img {
-    width: 180px;
-    max-width: 80%;
-    border-radius: 14px;
-    background: #fff;
-    padding: 10px;
-    box-shadow: 
-        0 0 25px rgba(0,255,198,0.6),
-        0 0 60px rgba(0,255,198,0.3);
-    transition: 0.4s ease;
-}
+        .feature {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(0,255,198,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0,255,198,0.12);
+            transition: 0.3s;
+        }
 
-.qr-img:hover {
-    transform: scale(1.08);
-    box-shadow: 
-        0 0 40px rgba(0,255,198,0.9),
-        0 0 90px rgba(0,255,198,0.6);
-}
+        .feature:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 0 40px rgba(0,255,198,0.35);
+        }
 
-/* ================= PORTAL ================= */
-.portal{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:35px;padding:40px}
-.portal-card{
-background:rgba(255,255,255,.06);
-border:1px solid rgba(0,255,198,.3);
-border-radius:24px;padding:30px;text-align:center;
-backdrop-filter:blur(12px);
-transition:.4s;box-shadow:0 0 30px rgba(0,255,198,.15)
-}
-.portal-card:hover{transform:translateY(-10px) scale(1.04);box-shadow:0 0 60px rgba(0,255,198,.5)}
-.icon{font-size:60px}
-.portal-btn{display:inline-block;margin-top:20px;padding:12px 26px;border-radius:40px;text-decoration:none;background:#00ffc6;color:#003;font-weight:bold}
+        /* ===== PORTAL ===== */
+        .portal {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            padding: 40px 60px 80px;
+        }
 
-/* ================= MAP ================= */
-.map{width:100%;height:300px;border-radius:20px;border:0;margin-top:40px}
+        .portal-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(0,255,198,0.25);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 35px 30px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(0,255,198,0.15);
+            transition: 0.4s ease;
+        }
 
-/* ================= ACESSIBILIDADE ================= */
-.contrast {
-    background: #ffffff !important;
-    color: #000000 !important;
-}
+        .portal-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 0 60px rgba(0,255,198,0.4);
+        }
 
-.contrast header h1 {
-    color: #000000 !important;
-    text-shadow: none !important;
-}
+        .portal-card.stone {
+            border-color: rgba(127,208,255,0.4);
+            box-shadow: 0 0 40px rgba(127,208,255,0.2);
+        }
 
-.contrast .portal-card {
-    background: #ffffff !important;
-    color: #000000 !important;
-    border: 2px solid #000 !important;
-}
+        .icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
 
-.contrast .portal-btn {
-    background: #000000 !important;
-    color: #ffffff !important;
-}
+        .portal-card h2 {
+            color: #00ffc6;
+            margin-bottom: 10px;
+        }
 
-footer{text-align:center;padding:20px;opacity:.6}
+        .portal-card.stone h2 {
+            color: #7fd0ff;
+        }
 
-</style>
+        .portal-card p {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            margin-bottom: 25px;
+        }
+
+        .portal-btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #00ffc6, #00bfa5);
+            color: #003333;
+            box-shadow: 0 0 18px rgba(0,255,198,0.7);
+            transition: 0.3s ease;
+        }
+
+        .portal-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 35px rgba(0,255,198,1);
+        }
+
+        .portal-btn.stone {
+            background: linear-gradient(135deg, #7fd0ff, #4db8ff);
+            color: #002033;
+            box-shadow: 0 0 18px rgba(127,208,255,0.7);
+        }
+
+        .portal-btn.stone:hover {
+            box-shadow: 0 0 35px rgba(127,208,255,1);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            opacity: 0.7;
+            font-size: 0.85rem;
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- Loader -->
-<div id="loader"><div class="loader-ring"></div></div>
-
-<div class="bg-anim"></div>
+<!-- LOADING -->
+<div id="loader">
+    <div class="spinner"></div>
+    <p>Inicializando sistema...</p>
+</div>
 
 <header>
-<h1 id="title">🌿 SETOR DE PAISAGISMO</h1>
-<p id="subtitle">Explore árvores e monumentos através de QR Codes inteligentes.</p>
-
-<div class="controls">
-<button onclick="setLang('pt')">PT</button>
-<button onclick="setLang('en')">EN</button>
-<button onclick="toggleContrast()">Contraste</button>
-</div>
-
-<!-- QR DINÂMICO -->
-<div id="qrBox"></div>
-
-<!-- QR FIXO -->
-<div class="qr-container">
-    <h3>📲 Escaneie para acessar</h3>
-    <img src="qr.png" alt="QR Code" class="qr-img">
-</div>
-
+    <h1>SETOR DE PAISAGISMO</h1>
+    <p>Sistema inteligente de identificação ambiental via QR Code, oferecendo informações, mídia interativa e acessibilidade para visitantes.</p>
 </header>
 
-<main class="portal">
+<section class="features">
+    <div class="feature">🚀 Tela de carregamento animada</div>
+    <div class="feature">📱 QR Code na própria tela</div>
+    <div class="feature">🌍 Multi-idioma automático</div>
+    <div class="feature">🗺️ Mapa interativo</div>
+    <div class="feature">♿ Acessibilidade</div>
+    <div class="feature">📊 Analytics de visitas</div>
+</section>
 
-<div class="portal-card">
-<div class="icon">🌳</div>
-<h2>Ipê Amarelo</h2>
-<p id="treeText">Fotos, vídeos e dados completos da árvore.</p>
-<a href="ipe-amarelo.html" class="portal-btn">Acessar</a>
-</div>
+<section class="portal">
+    <div class="portal-card">
+        <div class="icon">🌳</div>
+        <h2>Ipê Amarelo</h2>
+        <p>Informações botânicas, curiosidades, fotos e dados ambientais da árvore.</p>
+        <a href="ipe.html" class="portal-btn">Acessar</a>
+    </div>
 
-<div class="portal-card">
-<div class="icon">🗿</div>
-<h2>Monumento</h2>
-<p id="stoneText">História e registros da montagem.</p>
-<a href="monumento.html" class="portal-btn">Acessar</a>
-</div>
-
-</main>
-
-<!-- MAPA -->
-<iframe class="map" src="https://www.openstreetmap.org/export/embed.html?bbox=-47.9,-15.9,-47.8,-15.8"></iframe>
+    <div class="portal-card stone">
+        <div class="icon">🪨</div>
+        <h2>Monumento de Pedra</h2>
+        <p>História, processo de montagem, fotos e vídeos documentais.</p>
+        <a href="pedra.html" class="portal-btn stone">Acessar</a>
+    </div>
+</section>
 
 <footer>
-    © 2026 • Tiago Santos do Carmo • Todos os direitos reservados
-    <br>
-    Visitas: <span id="visits">0</span>
+    © 2026 Tiago Santos do Carmo — Todos os direitos reservados.
 </footer>
 
 <script>
-
-/* Loader */
-window.onload = () => {
-    setTimeout(() => {
-        document.getElementById('loader').style.display = 'none';
-    }, 1200);
-};
-
-/* QR Dinâmico */
-new QRCode(document.getElementById("qrBox"), window.location.href);
-
-/* Analytics simples */
-let v = localStorage.getItem('visits') || 0;
-v++;
-localStorage.setItem('visits', v);
-document.getElementById('visits').innerText = v;
-
-/* Idiomas */
-function setLang(lang){
-if(lang === 'en'){
- title.innerText = '🌿 LANDSCAPING SECTOR';
- subtitle.innerText = 'Explore nature and monuments with smart QR codes.';
- treeText.innerText = 'Photos, videos and full tree data.';
- stoneText.innerText = 'History and construction records.';
-}
-else{
- title.innerText = '🌿 SETOR DE PAISAGISMO';
- subtitle.innerText = 'Explore árvores e monumentos através de QR Codes inteligentes.';
- treeText.innerText = 'Fotos, vídeos e dados completos da árvore.';
- stoneText.innerText = 'História e registros da montagem.';
-}
-}
-
-/* Acessibilidade */
-function toggleContrast(){
- document.body.classList.toggle('contrast');
-}
-
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('loader').style.display = 'none';
+        }, 1200);
+    });
 </script>
 
 </body>
