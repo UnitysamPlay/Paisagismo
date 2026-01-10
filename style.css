@@ -1,65 +1,91 @@
-/* ===== PORTAL ===== */
+/* ===== PORTAL / HERO ===== */
 
 .hero {
     text-align: center;
-    padding: 90px 20px 50px;
+    padding: clamp(70px, 8vw, 110px) 20px 50px;
 }
 
 .hero h1 {
-    font-size: 3.2rem;
-    letter-spacing: 8px;
+    font-size: clamp(2.4rem, 5vw, 3.2rem);
+    letter-spacing: 0.35em;
     background: linear-gradient(90deg, #00ffc6, #7fd0ff, #00ffc6);
     background-size: 300%;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
     animation: titleFlow 6s linear infinite;
+    will-change: background-position;
 }
 
 @keyframes titleFlow {
-    0% { background-position: 0%; }
-    100% { background-position: 300%; }
+    from { background-position: 0%; }
+    to   { background-position: 300%; }
 }
 
 .hero p {
-    max-width: 720px;
-    margin: auto;
-    font-size: 1.15rem;
-    opacity: 0.88;
+    max-width: 760px;
+    margin: 16px auto 0;
+    font-size: 1.05rem;
+    opacity: 0.9;
 }
 
-/* GRID */
+/* ===== GRID ===== */
 .portal {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 45px;
-    padding: 50px 40px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(28px, 4vw, 45px);
+    padding: clamp(40px, 6vw, 60px) clamp(20px, 5vw, 40px);
 }
 
-/* CARD BASE */
+/* ===== CARD BASE ===== */
 .portal-card {
     position: relative;
     background: rgba(255,255,255,0.05);
     border-radius: 26px;
-    padding: 40px 32px;
+    padding: 38px 30px;
     text-align: center;
     backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     overflow: hidden;
-    transition: 0.45s cubic-bezier(.2,.8,.2,1);
     border: 1px solid rgba(0,255,198,0.25);
-    box-shadow: 
+    transition: transform 0.45s cubic-bezier(.2,.8,.2,1),
+                box-shadow 0.45s ease;
+    box-shadow:
         0 0 40px rgba(0,255,198,0.15),
         inset 0 0 25px rgba(0,255,198,0.05);
+    will-change: transform;
 }
 
-/* HOLOGRAFIC BORDER */
+/* ===== HOLOGRAPHIC BORDER ===== */
 .portal-card::before {
     content: "";
     position: absolute;
     inset: -2px;
     border-radius: inherit;
-    background: linear-gradient(120deg, transparent, rgba(0,255,198,0.6), transparent);
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(0,255,198,0.65),
+        transparent
+    );
     opacity: 0;
-    transition: 0.5s;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+/* ===== LIGHT SWEEP ===== */
+.portal-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.18),
+        transparent
+    );
+    transform: translateX(-130%);
+    transition: transform 0.9s ease;
     pointer-events: none;
 }
 
@@ -67,92 +93,90 @@
     opacity: 1;
 }
 
-/* LIGHT SWEEP */
-.portal-card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.15), transparent);
-    transform: translateX(-120%);
-    transition: 0.8s;
-}
-
 .portal-card:hover::after {
-    transform: translateX(120%);
+    transform: translateX(130%);
 }
 
 .portal-card:hover {
     transform: translateY(-14px) scale(1.05);
-    box-shadow: 
-        0 0 70px rgba(0,255,198,0.45),
+    box-shadow:
+        0 0 75px rgba(0,255,198,0.45),
         inset 0 0 35px rgba(0,255,198,0.12);
 }
 
-/* STONE VARIANT */
+/* ===== STONE VARIANT ===== */
 .portal-card.stone {
     border-color: rgba(127,208,255,0.35);
-    box-shadow: 
+    box-shadow:
         0 0 40px rgba(127,208,255,0.2),
         inset 0 0 20px rgba(127,208,255,0.06);
 }
 
 .portal-card.stone::before {
-    background: linear-gradient(120deg, transparent, rgba(127,208,255,0.6), transparent);
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(127,208,255,0.65),
+        transparent
+    );
 }
 
 .portal-card.stone:hover {
-    box-shadow: 
-        0 0 70px rgba(127,208,255,0.5),
+    box-shadow:
+        0 0 75px rgba(127,208,255,0.5),
         inset 0 0 35px rgba(127,208,255,0.12);
 }
 
-/* ICON */
+/* ===== ICON ===== */
 .icon {
     font-size: 64px;
     margin-bottom: 18px;
-    filter: drop-shadow(0 0 12px rgba(0,255,198,0.5));
+    filter: drop-shadow(0 0 12px rgba(0,255,198,0.55));
 }
 
-/* TITLES */
+/* ===== TITLES ===== */
 .portal-card h2 {
     color: #00ffc6;
     margin-bottom: 12px;
-    letter-spacing: 1px;
+    letter-spacing: 0.08em;
 }
 
 .portal-card.stone h2 {
     color: #7fd0ff;
 }
 
-/* TEXT */
+/* ===== TEXT ===== */
 .portal-card p {
-    font-size: 1rem;
-    opacity: 0.88;
+    font-size: 0.95rem;
+    opacity: 0.9;
     margin-bottom: 28px;
 }
 
-/* BUTTON */
+/* ===== BUTTON ===== */
 .portal-btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 15px 34px;
     border-radius: 50px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 700;
     letter-spacing: 1.2px;
     background: linear-gradient(135deg, #00ffc6, #00bfa5);
     color: #003333;
     box-shadow: 0 0 22px rgba(0,255,198,0.7);
-    transition: 0.35s ease;
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
 }
 
 .portal-btn:hover {
     transform: scale(1.12);
-    box-shadow: 0 0 40px rgba(0,255,198,1);
+    box-shadow: 0 0 42px rgba(0,255,198,1);
 }
 
-/* BUTTON STONE */
+/* ===== BUTTON STONE ===== */
 .portal-btn.stone {
     background: linear-gradient(135deg, #7fd0ff, #4db8ff);
     color: #002033;
@@ -160,5 +184,11 @@
 }
 
 .portal-btn.stone:hover {
-    box-shadow: 0 0 40px rgba(127,208,255,1);
+    box-shadow: 0 0 42px rgba(127,208,255,1);
+}
+
+/* ===== MOBILE REFINEMENT ===== */
+@media (max-width: 480px) {
+    .icon { font-size: 52px; }
+    .portal-btn { padding: 13px 26px; }
 }
