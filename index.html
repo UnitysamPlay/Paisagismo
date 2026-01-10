@@ -195,7 +195,7 @@ footer {
 <body>
 
 <!-- LOADING -->
-<div id="loader" aria-label="Carregando sistema">
+<div id="loader">
     <div class="spinner"></div>
     <p>Inicializando sistema...</p>
 </div>
@@ -208,7 +208,7 @@ footer {
     </p>
 </header>
 
-<section class="features" aria-label="Funcionalidades">
+<section class="features">
     <div class="feature">🚀 Tela de carregamento animada</div>
     <div class="feature">📱 QR Code na própria tela</div>
     <div class="feature">🌍 Multi-idioma automático</div>
@@ -217,22 +217,20 @@ footer {
     <div class="feature">📊 Analytics de visitas</div>
 </section>
 
-<main class="portal" aria-label="Acesso rápido">
+<main class="portal">
 
     <div class="portal-card">
         <div class="icon">🌳</div>
         <h2>Ipê Amarelo</h2>
         <p>Informações botânicas, curiosidades, fotos e dados ambientais da árvore.</p>
-        <!-- LINK CORRIGIDO -->
-        <a href="./ipe-amarelo.html" class="portal-btn">Acessar</a>
+        <a href="ipe.html" class="portal-btn">Acessar</a>
     </div>
 
     <div class="portal-card stone">
         <div class="icon">🪨</div>
         <h2>Monumento de Pedra</h2>
         <p>História, processo de montagem, fotos e vídeos documentais.</p>
-        <!-- LINK CORRIGIDO -->
-        <a href="./monumento.html" class="portal-btn stone">Acessar</a>
+        <a href="pedra.html" class="portal-btn stone">Acessar</a>
     </div>
 
 </main>
@@ -246,7 +244,7 @@ window.addEventListener('load', () => {
     setTimeout(() => {
         const loader = document.getElementById('loader');
         if (loader) loader.style.display = 'none';
-    }, 1000);
+    }, 800);
 });
 </script>
 
