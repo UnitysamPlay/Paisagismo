@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Mapa Verde • Sistema Inteligente</title>
+<title>Mapa Verde • Portal Interativo</title>
 <link rel="stylesheet" href="style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -11,38 +11,40 @@
 
 <div class="bg-anim"></div>
 
-<header>
+<header class="hero">
     <h1>🌿 MAPA VERDE</h1>
-    <p>Exploração inteligente da natureza e do patrimônio.</p>
+    <p>
+        Sistema inteligente de identificação por QR Code.<br>
+        Explore árvores e monumentos, descubra histórias, fotos e registros históricos.
+    </p>
 </header>
 
-<main>
+<main class="portal">
 
-    <section class="card">
-        <span class="tag">Árvore</span>
+    <div class="portal-card">
+        <div class="icon">🌳</div>
         <h2>Ipê Amarelo</h2>
-        <ul>
-            <li><b>Nome científico:</b> Handroanthus albus</li>
-            <li><b>Altura:</b> 10–15 metros</li>
-            <li><b>Origem:</b> Brasil</li>
-            <li><b>Curiosidade:</b> Floresce no inverno.</li>
-        </ul>
-    </section>
+        <p>
+            Espécie nativa brasileira, símbolo de resistência e beleza natural.
+            Veja fotos, vídeos e informações completas.
+        </p>
+        <a href="ipe-amarelo.html" class="portal-btn">Acessar árvore</a>
+    </div>
 
-    <section class="card">
-        <span class="tag stone">Monumento</span>
-        <h2>🗿 Marco de Pedra Central</h2>
-        <ul>
-            <li><b>Material:</b> Granito</li>
-            <li><b>Ano:</b> 1952</li>
-            <li><b>História:</b> Marco da fundação do bairro.</li>
-        </ul>
-    </section>
+    <div class="portal-card stone">
+        <div class="icon">🗿</div>
+        <h2>Monumento de Pedra</h2>
+        <p>
+            Registro histórico da fundação local.
+            Explore imagens da montagem e documentos históricos.
+        </p>
+        <a href="monumento.html" class="portal-btn stone">Acessar monumento</a>
+    </div>
 
 </main>
 
 <footer>
-    Sistema QR Code • Cidade Inteligente • Open Source
+    Projeto Educacional • QR Code • Cidade Inteligente
 </footer>
 
 </body>
