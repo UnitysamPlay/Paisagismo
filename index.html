@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Mapa Verde • Portal Inteligente</title>
+<title>Setor de Paisagismo • Portal Inteligente</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Acessibilidade -->
@@ -57,12 +57,29 @@ transition:.4s;box-shadow:0 0 30px rgba(0,255,198,.15)
 /* ================= MAP ================= */
 .map{width:100%;height:300px;border-radius:20px;border:0;margin-top:40px}
 
-/* ================= ADMIN ================= */
-#admin{display:none;padding:30px;text-align:center}
-#admin input{padding:10px;border-radius:10px;border:none;margin:5px}
+/* ================= ACESSIBILIDADE ================= */
+.contrast {
+    background: #ffffff !important;
+    color: #000000 !important;
+}
+
+.contrast header h1 {
+    color: #000000 !important;
+    text-shadow: none !important;
+}
+
+.contrast .portal-card {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000 !important;
+}
+
+.contrast .portal-btn {
+    background: #000000 !important;
+    color: #ffffff !important;
+}
 
 footer{text-align:center;padding:20px;opacity:.6}
-
 </style>
 </head>
 
@@ -81,7 +98,6 @@ footer{text-align:center;padding:20px;opacity:.6}
 <button onclick="setLang('pt')">PT</button>
 <button onclick="setLang('en')">EN</button>
 <button onclick="toggleContrast()">Contraste</button>
-
 </div>
 
 <div id="qrBox"></div>
@@ -108,44 +124,49 @@ footer{text-align:center;padding:20px;opacity:.6}
 <!-- MAPA -->
 <iframe class="map" src="https://www.openstreetmap.org/export/embed.html?bbox=-47.9,-15.9,-47.8,-15.8"></iframe>
 
-
-
 <footer>
     © 2026 • Tiago Santos do Carmo • Todos os direitos reservados
+    <br>
+    Visitas: <span id="visits">0</span>
 </footer>
 
 <script>
 /* Loader */
-window.onload=()=>{setTimeout(()=>document.getElementById('loader').style.display='none',1200)}
+window.onload = () => {
+    setTimeout(() => {
+        document.getElementById('loader').style.display = 'none';
+    }, 1200);
+};
 
 /* QR */
-new QRCode(document.getElementById("qrBox"), window.location.href)
+new QRCode(document.getElementById("qrBox"), window.location.href);
 
 /* Analytics simples */
-let v = localStorage.getItem('visits') || 0; v++; localStorage.setItem('visits',v)
-document.getElementById('visits').innerText = v
+let v = localStorage.getItem('visits') || 0;
+v++;
+localStorage.setItem('visits', v);
+document.getElementById('visits').innerText = v;
 
 /* Idiomas */
 function setLang(lang){
-if(lang==='en'){
- title.innerText='🌿 LANDSCAPING SECTOR'
- subtitle.innerText='Explore nature and monuments with smart QR codes.'
- treeText.innerText='Photos, videos and full tree data.'
- stoneText.innerText='History and construction records.'
+if(lang === 'en'){
+ title.innerText = '🌿 LANDSCAPING SECTOR';
+ subtitle.innerText = 'Explore nature and monuments with smart QR codes.';
+ treeText.innerText = 'Photos, videos and full tree data.';
+ stoneText.innerText = 'History and construction records.';
 }
 else{
- title.innerText='🌿 SETOR DE PAISAGISMO'
- subtitle.innerText='Explore árvores e monumentos através de QR Codes inteligentes.'
- treeText.innerText='Fotos, vídeos e dados completos da árvore.'
- stoneText.innerText='História e registros da montagem.'
+ title.innerText = '🌿 SETOR DE PAISAGISMO';
+ subtitle.innerText = 'Explore árvores e monumentos através de QR Codes inteligentes.';
+ treeText.innerText = 'Fotos, vídeos e dados completos da árvore.';
+ stoneText.innerText = 'História e registros da montagem.';
 }
 }
 
 /* Acessibilidade */
 function toggleContrast(){
-document.body.classList.toggle('contrast')
+ document.body.classList.toggle('contrast');
 }
-
 </script>
 
 </body>
