@@ -2,10 +2,16 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Setor de Paisagismo</title>
+    <title>Setor de Paisagismo • Portal Inteligente</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- SEO Básico -->
+    <meta name="description" content="Sistema inteligente de identificação ambiental via QR Code para o Setor de Paisagismo.">
+    <meta name="theme-color" content="#00ffc6">
+
     <!-- Fonte futurista -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
     <style>
@@ -13,7 +19,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Orbitron', system-ui, sans-serif;
         }
 
         body {
@@ -21,6 +27,7 @@
             color: #eaffff;
             min-height: 100vh;
             overflow-x: hidden;
+            line-height: 1.5;
         }
 
         /* ===== LOADING ===== */
@@ -52,11 +59,11 @@
         /* ===== HERO ===== */
         header {
             text-align: center;
-            padding: 80px 20px 40px;
+            padding: clamp(60px, 8vw, 100px) 20px 40px;
         }
 
         header h1 {
-            font-size: 3rem;
+            font-size: clamp(2rem, 5vw, 3rem);
             letter-spacing: 5px;
             color: #00ffc6;
             text-shadow: 0 0 25px rgba(0,255,198,0.6);
@@ -72,9 +79,9 @@
         /* ===== FEATURES ===== */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-            padding: 40px 60px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+            padding: 40px clamp(20px, 6vw, 60px);
         }
 
         .feature {
@@ -82,10 +89,11 @@
             border: 1px solid rgba(0,255,198,0.2);
             backdrop-filter: blur(10px);
             border-radius: 18px;
-            padding: 25px;
+            padding: 22px;
             text-align: center;
             box-shadow: 0 0 25px rgba(0,255,198,0.12);
-            transition: 0.3s;
+            transition: 0.3s ease;
+            font-size: 0.95rem;
         }
 
         .feature:hover {
@@ -96,9 +104,9 @@
         /* ===== PORTAL ===== */
         .portal {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 40px;
-            padding: 40px 60px 80px;
+            padding: 40px clamp(20px, 6vw, 60px) 80px;
         }
 
         .portal-card {
@@ -130,6 +138,7 @@
         .portal-card h2 {
             color: #00ffc6;
             margin-bottom: 10px;
+            font-size: 1.4rem;
         }
 
         .portal-card.stone h2 {
@@ -173,7 +182,7 @@
         /* ===== FOOTER ===== */
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 30px 15px;
             border-top: 1px solid rgba(255,255,255,0.08);
             opacity: 0.7;
             font-size: 0.85rem;
@@ -183,17 +192,20 @@
 <body>
 
 <!-- LOADING -->
-<div id="loader">
+<div id="loader" aria-label="Carregando sistema">
     <div class="spinner"></div>
     <p>Inicializando sistema...</p>
 </div>
 
 <header>
-    <h1>SETOR DE PAISAGISMO</h1>
-    <p>Sistema inteligente de identificação ambiental via QR Code, oferecendo informações, mídia interativa e acessibilidade para visitantes.</p>
+    <h1>🌿 SETOR DE PAISAGISMO</h1>
+    <p>
+        Sistema inteligente de identificação ambiental via QR Code,
+        oferecendo informações, mídia interativa e acessibilidade para visitantes.
+    </p>
 </header>
 
-<section class="features">
+<section class="features" aria-label="Funcionalidades">
     <div class="feature">🚀 Tela de carregamento animada</div>
     <div class="feature">📱 QR Code na própria tela</div>
     <div class="feature">🌍 Multi-idioma automático</div>
@@ -202,7 +214,7 @@
     <div class="feature">📊 Analytics de visitas</div>
 </section>
 
-<section class="portal">
+<main class="portal" aria-label="Acesso rápido">
     <div class="portal-card">
         <div class="icon">🌳</div>
         <h2>Ipê Amarelo</h2>
@@ -216,17 +228,19 @@
         <p>História, processo de montagem, fotos e vídeos documentais.</p>
         <a href="pedra.html" class="portal-btn stone">Acessar</a>
     </div>
-</section>
+</main>
 
 <footer>
-    © 2026 Tiago Santos do Carmo — Todos os direitos reservados.
+    © 2026 • Tiago Santos do Carmo • Todos os direitos reservados
 </footer>
 
 <script>
+    // Remove loader após carregamento
     window.addEventListener('load', () => {
         setTimeout(() => {
-            document.getElementById('loader').style.display = 'none';
-        }, 1200);
+            const loader = document.getElementById('loader');
+            if (loader) loader.style.display = 'none';
+        }, 1000);
     });
 </script>
 
