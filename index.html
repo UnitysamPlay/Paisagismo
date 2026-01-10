@@ -81,7 +81,7 @@ footer{text-align:center;padding:20px;opacity:.6}
 <button onclick="setLang('pt')">PT</button>
 <button onclick="setLang('en')">EN</button>
 <button onclick="toggleContrast()">Contraste</button>
-<button onclick="toggleAdmin()">Admin</button>
+
 </div>
 
 <div id="qrBox"></div>
@@ -108,16 +108,10 @@ footer{text-align:center;padding:20px;opacity:.6}
 <!-- MAPA -->
 <iframe class="map" src="https://www.openstreetmap.org/export/embed.html?bbox=-47.9,-15.9,-47.8,-15.8"></iframe>
 
-<!-- ADMIN -->
-<div id="admin">
-<h2>Painel de Cadastro (Demo)</h2>
-<input placeholder="Nome">
-<input placeholder="Descrição">
-<button>Salvar</button>
-</div>
+
 
 <footer>
-Visitas: <span id="visits"></span>
+    Sistema QR Code • Cidade Inteligente • Acessível • Multilíngue
 </footer>
 
 <script>
@@ -152,11 +146,6 @@ function toggleContrast(){
 document.body.classList.toggle('contrast')
 }
 
-/* Admin */
-function toggleAdmin(){
-let a=document.getElementById('admin')
-a.style.display = a.style.display==='block'?'none':'block'
-}
 </script>
 
 </body>
