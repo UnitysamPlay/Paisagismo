@@ -6,9 +6,197 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- CSS principal -->
-<link rel="stylesheet" href="./style.css">
+<!-- SEO -->
+<meta name="description" content="Ipê Amarelo • Espécie nativa brasileira de grande importância ambiental e paisagística.">
+<meta name="theme-color" content="#0b2b16">
 
+<!-- Fonte futurista -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', system-ui, sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top, #052615, #000);
+    color: #eafff1;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ===== HEADER ===== */
+.hero {
+    text-align: center;
+    padding: clamp(70px, 10vw, 110px) 20px 60px;
+}
+
+.hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    letter-spacing: 4px;
+    background: linear-gradient(90deg, #7cff9e, #00ff99, #7cff9e);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: glow 6s linear infinite;
+}
+
+@keyframes glow {
+    from { background-position: 0%; }
+    to   { background-position: 300%; }
+}
+
+.hero p {
+    margin: 18px auto;
+    max-width: 720px;
+    opacity: 0.88;
+}
+
+.btn-voltar {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 14px 34px;
+    border-radius: 40px;
+    text-decoration: none;
+    background: linear-gradient(135deg, #7cff9e, #00d67a);
+    color: #00331a;
+    font-weight: 700;
+    letter-spacing: 1px;
+    box-shadow: 0 0 25px rgba(0,255,153,0.7);
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.btn-voltar:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 45px rgba(0,255,153,1);
+}
+
+/* ===== CONTAINER ===== */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px 90px;
+    display: grid;
+    gap: 45px;
+}
+
+/* ===== CARD ===== */
+.card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(0,255,153,0.35);
+    backdrop-filter: blur(14px);
+    border-radius: 26px;
+    padding: clamp(28px, 4vw, 40px);
+    box-shadow: 0 0 40px rgba(0,255,153,0.18);
+
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+}
+
+.card.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: 0.9s cubic-bezier(.2,.8,.2,1);
+}
+
+.card h2 {
+    color: #7cff9e;
+    margin-bottom: 22px;
+    letter-spacing: 2px;
+}
+
+.card p {
+    line-height: 1.8;
+    opacity: 0.92;
+}
+
+/* ===== GALERIA ===== */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.gallery img {
+    width: 100%;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: transform .4s ease, box-shadow .4s ease;
+    box-shadow: 0 0 18px rgba(0,255,153,0.25);
+}
+
+.gallery img:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 40px rgba(0,255,153,0.65);
+}
+
+/* ===== VIDEO ===== */
+.video-box {
+    position: relative;
+    padding-top: 56.25%;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(0,255,153,0.45);
+}
+
+.video-box iframe,
+.video-box video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ===== LIGHTBOX ===== */
+#lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s ease;
+    z-index: 9999;
+}
+
+#lightbox.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#lightbox img {
+    max-width: 92%;
+    max-height: 92%;
+    border-radius: 18px;
+    box-shadow: 0 0 70px rgba(0,255,153,0.8);
+    animation: zoomIn 0.35s ease;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 30px;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+</style>
 </head>
 
 <body>
@@ -16,12 +204,12 @@
 <header class="hero">
     <h1>🌳 Ipê Amarelo</h1>
     <p>Espécie nativa brasileira de grande importância ambiental e paisagística.</p>
-
     <a href="./index.html" class="btn-voltar">⬅ Voltar ao Portal</a>
 </header>
 
 <main class="container">
 
+<!-- INFORMAÇÕES -->
 <section class="card">
     <h2>🌱 Informações</h2>
     <p><b>Nome científico:</b> Handroanthus albus</p>
@@ -31,21 +219,25 @@
     <p><b>Importância:</b> Arborização urbana e preservação ambiental.</p>
 </section>
 
+<!-- GALERIA em desenvolvimento -->
 <section class="card">
-    <h2>🖼️ Galeria de Fotos</h2>
+    <h2>🖼️ Galeria de Fotos em construção</h2>
     <div class="gallery">
-        <img src="./assets/fotos/ipe1.jpg" alt="Ipê Amarelo 1">
-        <img src="./assets/fotos/ipe2.jpg" alt="Ipê Amarelo 2">
-        <img src="./assets/fotos/ipe3.jpg" alt="Ipê Amarelo 3">
+        <img src="./assets/fotos/ipe1.jpg" alt="Ipê Amarelo - Foto 1" loading="lazy">
+        <img src="./assets/fotos/ipe2.jpg" alt="Ipê Amarelo - Foto 2" loading="lazy">
+        <img src="./assets/fotos/ipe3.jpg" alt="Ipê Amarelo - Foto 3" loading="lazy">
     </div>
 </section>
 
+<!-- VIDEO (se quiser depois trocar por YouTube, já está pronto) -->
 <section class="card">
     <h2>🎥 Vídeo</h2>
-    <video controls preload="metadata">
-        <source src="./assets/videos/ipe.mp4" type="video/mp4">
-        Seu navegador não suporta vídeo.
-    </video>
+    <div class="video-box">
+        <video controls preload="metadata">
+            <source src="./assets/videos/ipe.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+        </video>
+    </div>
 </section>
 
 </main>
@@ -53,6 +245,45 @@
 <footer>
     © 2026 • Tiago Santos do Carmo • Setor de Paisagismo
 </footer>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" aria-hidden="true">
+    <img id="lightbox-img" alt="Imagem ampliada">
+</div>
+
+<script>
+/* ===== LIGHTBOX ===== */
+const images = document.querySelectorAll('.gallery img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+images.forEach(img => {
+    img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('show');
+        lightbox.setAttribute('aria-hidden', 'false');
+    });
+});
+
+lightbox.addEventListener('click', () => {
+    lightbox.classList.remove('show');
+    lightbox.setAttribute('aria-hidden', 'true');
+});
+
+/* ===== ANIMAÇÃO DOS CARDS ===== */
+const cards = document.querySelectorAll('.card');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.2 });
+
+cards.forEach(card => observer.observe(card));
+</script>
 
 </body>
 </html>
