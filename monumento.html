@@ -6,12 +6,17 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- SEO básico -->
+<meta name="description" content="Monumento de Pedra • Registro histórico da construção, significado cultural e processo de montagem.">
+<meta name="theme-color" content="#061f26">
+
 <!-- Fonte futurista -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
+/* ===== RESET ===== */
 * {
     margin: 0;
     padding: 0;
@@ -29,14 +34,16 @@ body {
 /* ===== HEADER ===== */
 .hero {
     text-align: center;
-    padding: 90px 20px 50px;
+    padding: clamp(70px, 10vw, 110px) 20px 60px;
 }
 
 .hero h1 {
     font-size: clamp(2.2rem, 5vw, 3.2rem);
     letter-spacing: 4px;
     background: linear-gradient(90deg, #7fd0ff, #00ffc6, #7fd0ff);
+    background-size: 300%;
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
     animation: glow 6s linear infinite;
 }
@@ -63,11 +70,11 @@ body {
     font-weight: 700;
     letter-spacing: 1px;
     box-shadow: 0 0 25px rgba(127,208,255,0.7);
-    transition: 0.35s ease;
+    transition: transform .3s ease, box-shadow .3s ease;
 }
 
 .btn-voltar:hover {
-    transform: scale(1.1);
+    transform: scale(1.08);
     box-shadow: 0 0 45px rgba(127,208,255,1);
 }
 
@@ -86,7 +93,7 @@ body {
     border: 1px solid rgba(127,208,255,0.35);
     backdrop-filter: blur(14px);
     border-radius: 26px;
-    padding: 40px;
+    padding: clamp(28px, 4vw, 40px);
     box-shadow: 0 0 40px rgba(127,208,255,0.18);
 
     opacity: 0;
@@ -113,7 +120,7 @@ body {
 /* ===== GALERIA ===== */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 22px;
 }
 
@@ -121,7 +128,7 @@ body {
     width: 100%;
     border-radius: 18px;
     cursor: pointer;
-    transition: 0.4s ease;
+    transition: transform .4s ease, box-shadow .4s ease;
     box-shadow: 0 0 18px rgba(127,208,255,0.25);
 }
 
@@ -158,7 +165,7 @@ body {
     justify-content: center;
     opacity: 0;
     pointer-events: none;
-    transition: 0.4s ease;
+    transition: opacity .4s ease;
     z-index: 9999;
 }
 
@@ -168,15 +175,15 @@ body {
 }
 
 #lightbox img {
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 92%;
+    max-height: 92%;
     border-radius: 18px;
     box-shadow: 0 0 70px rgba(127,208,255,0.8);
-    animation: zoomIn 0.4s ease;
+    animation: zoomIn 0.35s ease;
 }
 
 @keyframes zoomIn {
-    from { transform: scale(0.85); opacity: 0; }
+    from { transform: scale(0.9); opacity: 0; }
     to   { transform: scale(1); opacity: 1; }
 }
 
@@ -214,12 +221,11 @@ footer {
 <section class="card">
     <h2>🖼️ Galeria de Fotos</h2>
     <div class="gallery">
-        <img src="./assets/fotos/pedra1.jpg" alt="Monumento 1">
-        <img src="./assets/fotos/pedra2.jpg" alt="Monumento 2">
-        <img src="./assets/fotos/pedra3.jpg" alt="Monumento 3">
+        <img src="./assets/fotos/pedra1.jpg" alt="Monumento de Pedra - Foto 1" loading="lazy">
+        <img src="./assets/fotos/pedra2.jpg" alt="Monumento de Pedra - Foto 2" loading="lazy">
+        <img src="./assets/fotos/pedra3.jpg" alt="Monumento de Pedra - Foto 3" loading="lazy">
     </div>
 </section>
-
 
 <!-- VIDEO -->
 <section class="card">
@@ -227,7 +233,9 @@ footer {
     <div class="video-box">
         <iframe 
             src="https://www.youtube.com/embed/nWNx877Pq8k"
-            title="Vídeo da Montagem"
+            title="Vídeo da Montagem do Monumento"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
         </iframe>
@@ -241,8 +249,8 @@ footer {
 </footer>
 
 <!-- LIGHTBOX -->
-<div id="lightbox">
-    <img id="lightbox-img">
+<div id="lightbox" aria-hidden="true">
+    <img id="lightbox-img" alt="Imagem ampliada">
 </div>
 
 <script>
@@ -255,11 +263,13 @@ images.forEach(img => {
     img.addEventListener('click', () => {
         lightboxImg.src = img.src;
         lightbox.classList.add('show');
+        lightbox.setAttribute('aria-hidden', 'false');
     });
 });
 
 lightbox.addEventListener('click', () => {
     lightbox.classList.remove('show');
+    lightbox.setAttribute('aria-hidden', 'true');
 });
 
 /* ===== ANIMAÇÃO DOS CARDS ===== */
@@ -269,6 +279,7 @@ const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('show');
+            observer.unobserve(entry.target);
         }
     });
 }, { threshold: 0.2 });
