@@ -7,7 +7,7 @@
 
 .hero h1 {
     font-size: clamp(2.4rem, 5vw, 3.2rem);
-    letter-spacing: 0.35em;
+    letter-spacing: 0.28em; /* levemente reduzido p/ mobile */
     background: linear-gradient(90deg, #00ffc6, #7fd0ff, #00ffc6);
     background-size: 300%;
     -webkit-background-clip: text;
@@ -15,6 +15,7 @@
     color: transparent;
     animation: titleFlow 6s linear infinite;
     will-change: background-position;
+    text-wrap: balance;
 }
 
 @keyframes titleFlow {
@@ -27,6 +28,7 @@
     margin: 16px auto 0;
     font-size: 1.05rem;
     opacity: 0.9;
+    line-height: 1.6;
 }
 
 /* ===== GRID ===== */
@@ -48,8 +50,10 @@
     -webkit-backdrop-filter: blur(14px);
     overflow: hidden;
     border: 1px solid rgba(0,255,198,0.25);
-    transition: transform 0.45s cubic-bezier(.2,.8,.2,1),
-                box-shadow 0.45s ease;
+    transition:
+        transform 0.45s cubic-bezier(.2,.8,.2,1),
+        box-shadow 0.45s ease,
+        border-color 0.45s ease;
     box-shadow:
         0 0 40px rgba(0,255,198,0.15),
         inset 0 0 25px rgba(0,255,198,0.05);
@@ -98,7 +102,7 @@
 }
 
 .portal-card:hover {
-    transform: translateY(-14px) scale(1.05);
+    transform: translateY(-12px) scale(1.045);
     box-shadow:
         0 0 75px rgba(0,255,198,0.45),
         inset 0 0 35px rgba(0,255,198,0.12);
@@ -131,7 +135,7 @@
 .icon {
     font-size: 64px;
     margin-bottom: 18px;
-    filter: drop-shadow(0 0 12px rgba(0,255,198,0.55));
+    filter: drop-shadow(0 0 10px rgba(0,255,198,0.55));
 }
 
 /* ===== TITLES ===== */
@@ -150,6 +154,7 @@
     font-size: 0.95rem;
     opacity: 0.9;
     margin-bottom: 28px;
+    line-height: 1.55;
 }
 
 /* ===== BUTTON ===== */
@@ -165,15 +170,18 @@
     background: linear-gradient(135deg, #00ffc6, #00bfa5);
     color: #003333;
     box-shadow: 0 0 22px rgba(0,255,198,0.7);
-    transition: transform 0.3s ease,
-                box-shadow 0.3s ease;
+    transition:
+        transform 0.28s ease,
+        box-shadow 0.28s ease,
+        filter 0.28s ease;
     position: relative;
     overflow: hidden;
 }
 
 .portal-btn:hover {
-    transform: scale(1.12);
+    transform: scale(1.1);
     box-shadow: 0 0 42px rgba(0,255,198,1);
+    filter: brightness(1.08);
 }
 
 /* ===== BUTTON STONE ===== */
@@ -191,4 +199,5 @@
 @media (max-width: 480px) {
     .icon { font-size: 52px; }
     .portal-btn { padding: 13px 26px; }
+    .hero h1 { letter-spacing: 0.18em; }
 }
