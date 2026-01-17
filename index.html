@@ -22,7 +22,7 @@ body{
     overflow-x:hidden;
 }
 
-/* ================= HERO EXPOSIÇÃO PRO ================= */
+/* ================= HERO ================= */
 
 .hero{
     position:relative;
@@ -30,7 +30,7 @@ body{
     background:
         radial-gradient(circle at 20% 30%, rgba(0,255,198,.25), transparent 50%),
         linear-gradient(to right, rgba(0,0,0,.65), rgba(0,0,0,.25)),
-        url("assets/img/logo.png")
+        url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1800")
         center/cover no-repeat;
     display:flex;
     align-items:center;
@@ -50,6 +50,22 @@ body{
     position:relative;
     padding:clamp(60px,8vw,130px) 8vw;
     max-width:760px;
+}
+
+/* LOGO */
+.hero-logo{
+    width:140px;
+    max-width:40vw;
+    margin-bottom:26px;
+    filter:
+        drop-shadow(0 0 18px rgba(0,255,198,.8))
+        drop-shadow(0 0 40px rgba(0,255,198,.4));
+    animation:logoFloat 4s ease-in-out infinite alternate;
+}
+
+@keyframes logoFloat{
+    from{transform:translateY(0)}
+    to{transform:translateY(-12px)}
 }
 
 .hero h1{
@@ -110,7 +126,7 @@ body{
     padding:clamp(40px,6vw,90px) clamp(20px,7vw,110px);
 }
 
-/* ================= CARD GLASS PRO ================= */
+/* ================= CARD GLASS ================= */
 
 .portal-card{
     position:relative;
@@ -133,9 +149,7 @@ body{
 
 /* efeitos não bloqueiam clique */
 .portal-card::before,
-.portal-card::after{
-    pointer-events:none;
-}
+.portal-card::after{ pointer-events:none; }
 
 /* Borda holográfica */
 .portal-card::before{
@@ -148,7 +162,7 @@ body{
     transition:.5s ease;
 }
 
-/* Reflexo dinâmico */
+/* Reflexo */
 .portal-card::after{
     content:"";
     position:absolute;
@@ -168,7 +182,7 @@ body{
         inset 0 0 45px rgba(0,255,198,.18);
 }
 
-/* ===== VARIANTE STONE ===== */
+/* VARIANTE STONE */
 
 .portal-card.stone{
     border-color:rgba(127,208,255,.35);
@@ -240,7 +254,7 @@ body{
         inset 0 0 16px rgba(255,255,255,.45);
 }
 
-/* ===== BUTTON STONE ===== */
+/* BUTTON STONE */
 
 .portal-btn.stone{
     background:linear-gradient(135deg,#7fd0ff,#4db8ff);
@@ -270,6 +284,9 @@ body{
 
 <section class="hero">
     <div class="hero-content">
+        <!-- SUA LOGO -->
+        <img src="assets/img/logo.png" class="hero-logo" alt="Logo do projeto">
+
         <h1>PORTAL AMBIENTAL</h1>
         <p>Escaneie os QR Codes na praça e descubra espécies, histórias e monumentos do nosso espaço.</p>
     </div>
