@@ -132,8 +132,8 @@ body{background:#071b12;color:#eafff1}
   <div class="chat-header">🌿 Auria — Assistente Ambiental</div>
   <div class="chat-messages" id="messages">
     <div class="msg bot">
-      Olá! Eu sou a Auria 🌱, criada por Tiago Santos do Carmo.  
-      Ainda estou em treinamento. Pergunte sobre árvores, jardins, praça ou monumento.
+      Olá! Eu sou a Auria 🌱, criada por Tiago Santos do Carmo.<br>
+      Pergunte sobre árvores, jardins, praça ou monumento.
     </div>
   </div>
   <div class="chat-input">
@@ -144,154 +144,107 @@ body{background:#071b12;color:#eafff1}
 
 <script>
 function toggleChat(){
-  const c=document.getElementById("chatbox");
-  const i=document.getElementById("userInput");
-  c.style.display = c.style.display==="flex" ? "none" : "flex";
+  const c = document.getElementById("chatbox");
+  const i = document.getElementById("userInput");
+  c.style.display = c.style.display === "flex" ? "none" : "flex";
   setTimeout(()=>i.focus(),200);
 }
 
 function addMsg(text,cls){
-  const div=document.createElement("div");
-  div.className="msg "+cls;
-  div.innerText=text;
-  const box=document.getElementById("messages");
+  const div = document.createElement("div");
+  div.className = "msg " + cls;
+  div.innerText = text;
+  const box = document.getElementById("messages");
   box.appendChild(div);
-  box.scrollTop=box.scrollHeight;
+  box.scrollTop = box.scrollHeight;
 }
 
-/* ===== AURIA v5 — MOTOR MVP CONVERSACIONAL ===== */
+function normalize(t){
+  return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 
+/* ===== AURIA v6 — MVP ===== */
 function botReply(q){
 
   if(!q || !q.trim())
-    return "Pode perguntar 🌿 Posso falar sobre jardins, árvores, a praça e o monumento.";
+    return "Pode perguntar 🌿 Posso falar sobre jardins, árvores, a praça ou o monumento.";
 
-  q = q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
-  /* ===== CUMPRIMENTOS ===== */
+  q = normalize(q);
 
   if(q.includes("oi") || q.includes("ola") || q.includes("bom dia") || q.includes("boa tarde") || q.includes("boa noite"))
-    return "Olá! 😊 Eu sou a Auria, assistente ambiental do portal. Quer saber sobre jardins, árvores ou a praça?";
+    return "Oi! 😊 Quer saber sobre jardins, árvores ou a praça?";
 
-  if(q.includes("tudo bem") || q.includes("como vai") || q.includes("beleza"))
-    return "Tudo ótimo por aqui 🌱 pronta pra te ajudar com informações sobre natureza e paisagismo!";
+  if(q.includes("tudo bem") || q.includes("como vai"))
+    return "Tudo certo 🌱 pronta pra ajudar!";
 
-  /* ===== IDENTIDADE ===== */
+  if(q.includes("auria") || q.includes("quem e voce"))
+    return "Sou a Auria, assistente ambiental criada por Tiago Santos do Carmo.";
 
-  if(q.includes("auria") || q.includes("quem e voce") || q.includes("quem e vc"))
-    return "Sou a Auria 🌿, assistente ambiental do Portal, criada por Tiago Santos do Carmo e ainda em processo de treinamento.";
+  if(q.includes("tiago") || q.includes("criador"))
+    return "Fui desenvolvida por Tiago Santos do Carmo como projeto educativo.";
 
-  if(q.includes("tiago") || q.includes("criador") || q.includes("quem te criou"))
-    return "Fui desenvolvida por Tiago Santos do Carmo como parte de um projeto educativo voltado ao paisagismo e à cidadania.";
-
-  if(q.includes("projeto"))
-    return "Este projeto usa site, QR Codes e a Auria para levar educação ambiental a espaços públicos como a praça.";
-
-  /* ===== PAISAGISMO ORIENTAL ===== */
-
-  if(q.includes("jardim japones") || q.includes("japones") || q.includes("oriental"))
-    return "O paisagismo oriental busca harmonia com a natureza. Ele usa pedras, água, musgos, árvores podadas e caminhos curvos para criar equilíbrio e tranquilidade.";
+  if(q.includes("jardim japones") || q.includes("oriental"))
+    return "O paisagismo oriental busca harmonia usando pedras, água e caminhos curvos.";
 
   if(q.includes("zen"))
-    return "O jardim zen é um tipo de jardim japonês que usa areia e pedras para representar montanhas e rios, ajudando na meditação e no relaxamento.";
+    return "Jardins zen usam areia e pedras para representar a natureza.";
 
   if(q.includes("bonsai"))
-    return "Bonsai é a arte de cultivar árvores em miniatura, mantendo a forma natural e simbolizando paciência e cuidado.";
+    return "Bonsai é a arte de cultivar árvores em miniatura.";
 
-  if(q.includes("lanterna") || q.includes("torii"))
-    return "Lanternas de pedra e portais são elementos simbólicos nos jardins orientais e representam iluminação e transição espiritual.";
-
-  /* ===== PAISAGISMO OCIDENTAL ===== */
-
-  if(q.includes("jardim europeu") || q.includes("europeu") || q.includes("classico") || q.includes("formal"))
-    return "O paisagismo europeu é mais organizado e simétrico, com canteiros geométricos, gramados amplos e caminhos retos.";
-
-  if(q.includes("rosas") || q.includes("roseira"))
-    return "Rosas são comuns em jardins clássicos e precisam de boa irrigação e podas regulares para florescer bem.";
+  if(q.includes("jardim europeu") || q.includes("classico"))
+    return "O jardim europeu é simétrico, com canteiros geométricos.";
 
   if(q.includes("topiaria"))
-    return "Topiaria é a técnica de podar plantas em formas geométricas ou artísticas, muito usada em jardins europeus.";
-
-  /* ===== PRAÇA E PAISAGISMO URBANO ===== */
-
-  if(q.includes("praca") || q.includes("urbano"))
-    return "O paisagismo urbano melhora o conforto térmico, valoriza os espaços e incentiva a convivência entre as pessoas.";
-
-  if(q.includes("banco") || q.includes("descanso"))
-    return "Áreas de descanso devem ficar em locais sombreados e tranquilos para maior conforto dos visitantes.";
-
-  if(q.includes("iluminacao"))
-    return "Boa iluminação valoriza o paisagismo e aumenta a segurança da praça durante a noite.";
-
-  if(q.includes("acessibilidade"))
-    return "Caminhos acessíveis garantem que idosos, crianças e pessoas com deficiência possam circular com segurança.";
-
-  /* ===== ARBORIZAÇÃO ===== */
+    return "Topiaria é a poda artística em formas decorativas.";
 
   if(q.includes("arvore"))
-    return "As árvores ajudam a reduzir o calor, melhoram a qualidade do ar, abrigam animais e deixam a cidade mais bonita.";
-
-  if(q.includes("nativa"))
-    return "Plantas nativas se adaptam melhor ao clima local e ajudam a manter a biodiversidade.";
-
-  if(q.includes("floracao"))
-    return "A floração deixa o ambiente mais bonito e ajuda a atrair polinizadores como abelhas e borboletas.";
-
-  if(q.includes("poda"))
-    return "A poda correta mantém a saúde da planta e evita riscos como galhos caindo.";
-
-  /* ===== MEIO AMBIENTE ===== */
-
-  if(q.includes("meio ambiente") || q.includes("sustentavel"))
-    return "Paisagismo sustentável usa espécies adequadas e reduz o consumo de água e manutenção.";
-
-  if(q.includes("agua"))
-    return "Economizar água é fundamental para preservar os recursos naturais e manter os jardins saudáveis.";
-
-  if(q.includes("reciclagem"))
-    return "A reciclagem reduz o lixo, economiza recursos e ajuda a proteger o meio ambiente.";
-
-  /* ===== ITENS DA PRAÇA ===== */
+    return "Árvores reduzem o calor, melhoram o ar e ajudam a fauna.";
 
   if(q.includes("ipe"))
-    return "O Ipê Amarelo é uma árvore nativa do Brasil, famosa pela floração intensa no inverno e muito usada em áreas urbanas.";
+    return "O Ipê Amarelo é nativo do Brasil e floresce no inverno.";
 
   if(q.includes("monumento"))
-    return "O monumento é um marco cultural que representa a história e a identidade da comunidade.";
+    return "O monumento representa a história da comunidade.";
 
-  /* ===== CONTINUIDADE DE CONVERSA ===== */
+  if(q.includes("praca"))
+    return "A praça é um espaço de lazer e educação ambiental.";
+
+  if(q.includes("agua"))
+    return "Economizar água é essencial para o meio ambiente.";
+
+  if(q.includes("reciclagem"))
+    return "A reciclagem ajuda a reduzir o lixo.";
 
   if(q.includes("obrigado") || q.includes("valeu"))
-    return "De nada! 😊 Se quiser, pode continuar perguntando sobre a praça ou sobre paisagismo.";
+    return "Sempre às ordens 😊";
 
-  /* ===== DEFAULT ===== */
-
-  return "Ainda estou em treinamento 🌱, mas posso falar sobre jardins orientais e europeus, árvores, meio ambiente, a praça e o monumento.";
+  return "Ainda estou em treinamento 🌱, mas posso falar sobre jardins, árvores, a praça e o monumento.";
 }
 
-
 function sendMsg(){
-  const input=document.getElementById("userInput");
-  if(!input.value) return;
+  const input = document.getElementById("userInput");
+  if(!input.value.trim()) return;
 
   addMsg(input.value,"user");
 
-  const typing=document.createElement("div");
+  const typing = document.createElement("div");
   typing.className="msg bot typing";
   typing.innerText="Auria está digitando...";
-  document.getElementById("messages").appendChild(typing);
+  const box=document.getElementById("messages");
+  box.appendChild(typing);
+  box.scrollTop=box.scrollHeight;
 
   setTimeout(()=>{
     typing.remove();
-    const r=botReply(input.value);
-    addMsg(r,"bot");
+    addMsg(botReply(input.value),"bot");
   },500);
 
   input.value="";
 }
 
 document.getElementById("userInput")
-  .addEventListener("keydown",e=>{if(e.key==="Enter")sendMsg()});
+  .addEventListener("keydown",e=>{ if(e.key==="Enter") sendMsg(); });
 </script>
 
 </body>
