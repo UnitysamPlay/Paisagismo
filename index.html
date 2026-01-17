@@ -1,313 +1,167 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Portal Ambiental • Setor de Paisagismo</title>
+<title>🌿 Portal Ambiental • Setor de Paisagismo</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Portal ambiental interativo com acesso por QR Code para informações botânicas e culturais.">
+<meta name="theme-color" content="#0b2b16">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',system-ui,sans-serif}
 
 body{
-    background:#f3f7f5;
-    color:#1f2d27;
+    background:radial-gradient(circle at top,#052615,#000);
+    color:#eafff1;
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
-/* ================= HERO ================= */
-
+/* ===== HERO ===== */
 .hero{
+    text-align:center;
+    padding:clamp(90px,12vw,140px) 20px 80px;
     position:relative;
-    min-height:85vh;
-    background:url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1800") center/cover fixed no-repeat;
-    display:flex;
-    align-items:center;
 }
-
-.hero::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,.35));
-}
-
 .hero::after{
     content:"";
-    position:absolute;
-    inset:0;
-    background:radial-gradient(circle at left, rgba(0,255,198,.25), transparent 55%);
+    position:absolute;inset:-40%;
+    background:radial-gradient(circle,rgba(124,255,158,.18),transparent 60%);
+    animation:aura 10s ease-in-out infinite alternate;
+    z-index:-1;
 }
-
-.hero-content{
-    position:relative;
-    color:#fff;
-    padding:clamp(60px,8vw,120px);
-    max-width:760px;
-}
+@keyframes aura{from{transform:scale(1)}to{transform:scale(1.25)}}
 
 .hero h1{
-    font-size:clamp(2.4rem,5vw,3.4rem);
-    line-height:1.2;
-    letter-spacing:.12em;
-    background:linear-gradient(90deg,#00ffc6,#7fd0ff,#00ffc6);
+    font-size:clamp(2.6rem,6vw,3.6rem);
+    letter-spacing:6px;
+    background:linear-gradient(90deg,#7cff9e,#00ff99,#7cff9e);
     background-size:300%;
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    animation:titleFlow 6s linear infinite;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:glow 6s linear infinite;
 }
-
-@keyframes titleFlow{
-    from{background-position:0%}
-    to{background-position:300%}
-}
+@keyframes glow{from{background-position:0%}to{background-position:300%}}
 
 .hero p{
-    font-size:1.1rem;
-    margin-top:18px;
-    opacity:.95;
-    max-width:520px;
+    margin:20px auto;
+    max-width:760px;
+    opacity:.9;
 }
 
-/* ================= SECTION BASE ================= */
-
-.section{
-    padding:100px clamp(20px,8vw,120px);
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:60px;
-}
-
-.section-title h2{
-    font-size:2rem;
-    color:#2f6b4f;
-    margin-bottom:12px;
-}
-
-.section-title p{
-    color:#555;
-}
-
-/* ================= STEPS ================= */
-
-.steps{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:35px;
-}
-
-.step{
-    background:#fff;
-    padding:30px;
-    border-radius:22px;
-    box-shadow:0 20px 45px rgba(0,0,0,.08);
-    position:relative;
-}
-
-.step span{
-    position:absolute;
-    top:-18px;
-    left:20px;
-    background:#2f6b4f;
-    color:#fff;
-    padding:6px 14px;
-    border-radius:30px;
-    font-size:.8rem;
-}
-
-/* ================= PORTAL CARDS ================= */
-
+/* ===== PORTAL GRID ===== */
 .portal{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:45px;
+    gap:clamp(30px,5vw,50px);
+    padding:clamp(40px,6vw,90px) clamp(20px,8vw,140px);
 }
 
-.card{
+/* ===== CARD ===== */
+.portal-card{
     position:relative;
-    background:rgba(255,255,255,.7);
-    backdrop-filter:blur(12px);
-    border-radius:26px;
-    padding:42px 34px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(0,255,153,.35);
+    border-radius:28px;
+    padding:46px 34px;
     text-align:center;
+    backdrop-filter:blur(16px);
     overflow:hidden;
-    border:1px solid rgba(47,107,79,.25);
-    box-shadow:0 30px 60px rgba(0,0,0,.1);
+    box-shadow:0 0 40px rgba(0,255,153,.18);
     transition:.45s cubic-bezier(.2,.8,.2,1);
 }
-
-.card::after{
+.portal-card::before{
     content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(120deg,transparent,rgba(47,107,79,.18),transparent);
-    transform:translateX(-130%);
-    transition:.9s;
+    position:absolute;inset:-2px;border-radius:inherit;
+    background:linear-gradient(120deg,transparent,rgba(0,255,153,.65),transparent);
+    opacity:0;transition:.5s;
 }
-
-.card:hover::after{transform:translateX(130%)}
-.card:hover{transform:translateY(-12px) scale(1.04)}
-
-.icon{
-    font-size:60px;
-    margin-bottom:18px;
-}
-
-.card h3{
-    color:#2f6b4f;
-    margin-bottom:12px;
-}
-
-.card p{
-    color:#555;
-    margin-bottom:30px;
-}
-
-.btn{
-    display:inline-block;
-    padding:14px 36px;
-    border-radius:40px;
-    background:linear-gradient(135deg,#2f6b4f,#1f4030);
-    color:#fff;
-    text-decoration:none;
-    font-weight:600;
-}
-
-/* ================= QR SECTION ================= */
-
-.qr-section{
-    background:linear-gradient(135deg,#1f4030,#2f6b4f);
-    color:#fff;
-}
-
-.qr-wrap{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:50px;
-    align-items:center;
-}
-
-.qr-box{
-    background:rgba(255,255,255,.1);
-    backdrop-filter:blur(12px);
-    padding:32px;
-    border-radius:24px;
-    text-align:center;
-    border:1px solid rgba(255,255,255,.35);
-    position:relative;
-}
-
-.qr-box::after{
+.portal-card::after{
     content:"";
-    position:absolute;
-    inset:-6px;
-    border-radius:inherit;
-    border:2px solid rgba(0,255,198,.6);
-    animation:pulse 2s infinite;
+    position:absolute;inset:0;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.18),transparent);
+    transform:translateX(-140%);transition:.9s;
+}
+.portal-card:hover::before{opacity:1}
+.portal-card:hover::after{transform:translateX(140%)}
+.portal-card:hover{
+    transform:translateY(-14px) scale(1.06);
+    box-shadow:0 0 90px rgba(0,255,153,.5);
 }
 
-@keyframes pulse{
-    0%{opacity:.9}
-    100%{opacity:0}
+.portal-card.stone{
+    border-color:rgba(127,208,255,.4);
+    box-shadow:0 0 40px rgba(127,208,255,.25);
+}
+.portal-card.stone::before{
+    background:linear-gradient(120deg,transparent,rgba(127,208,255,.7),transparent);
+}
+.portal-card.stone:hover{
+    box-shadow:0 0 90px rgba(127,208,255,.55);
 }
 
-.qr-placeholder{
-    width:190px;
-    height:190px;
-    margin:18px auto;
-    border-radius:14px;
-    background:
-        repeating-linear-gradient(45deg,#eee,#eee 10px,#bbb 10px,#bbb 20px);
-}
+/* ===== CONTENT ===== */
+.icon{font-size:68px;margin-bottom:18px;filter:drop-shadow(0 0 14px rgba(0,255,153,.7))}
+.portal-card h2{color:#7cff9e;letter-spacing:.12em;margin-bottom:14px}
+.portal-card.stone h2{color:#7fd0ff}
+.portal-card p{opacity:.9;line-height:1.6;margin-bottom:30px}
 
-/* ================= FOOTER ================= */
-
-footer{
-    background:#e9eeec;
-    text-align:center;
-    padding:25px 15px;
-    font-size:.85rem;
-    color:#555;
+/* ===== BUTTON ===== */
+.portal-btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:16px 40px;border-radius:50px;text-decoration:none;
+    font-weight:700;letter-spacing:1.4px;
+    background:linear-gradient(135deg,#7cff9e,#00d67a);
+    color:#00331a;
+    box-shadow:0 0 26px rgba(0,255,153,.8);
+    transition:.3s ease;
 }
+.portal-btn:hover{transform:scale(1.15);box-shadow:0 0 55px rgba(0,255,153,1)}
+
+.portal-btn.stone{
+    background:linear-gradient(135deg,#7fd0ff,#4db8ff);
+    color:#002033;
+    box-shadow:0 0 26px rgba(127,208,255,.8);
+}
+.portal-btn.stone:hover{box-shadow:0 0 55px rgba(127,208,255,1)}
+
+footer{text-align:center;padding:30px;font-size:.85rem;opacity:.7;border-top:1px solid rgba(255,255,255,.08)}
 </style>
 </head>
 
 <body>
 
-<section class="hero">
-    <div class="hero-content">
-        <h1>Explore. Aprenda. Preserve.</h1>
-        <p>
-            Um portal interativo que conecta visitantes à natureza,
-            história e cultura através de QR Codes espalhados pelo espaço.
-        </p>
-    </div>
-</section>
+<header class="hero">
+    <h1>🌿 PORTAL AMBIENTAL</h1>
+    <p>Escaneie os QR Codes na praça e descubra histórias, espécies e monumentos do nosso espaço.</p>
+</header>
 
-<section class="section">
-    <div class="section-title">
-        <h2>🌿 Como funciona o projeto</h2>
-        <p>Transformando a praça em um espaço educativo digital</p>
-    </div>
+<main class="portal">
 
-    <div class="steps">
-        <div class="step"><span>Passo 1</span> Encontre um QR Code próximo às árvores ou monumentos</div>
-        <div class="step"><span>Passo 2</span> Aponte a câmera do celular e escaneie</div>
-        <div class="step"><span>Passo 3</span> Acesse informações, fotos e curiosidades</div>
-        <div class="step"><span>Passo 4</span> Aprenda, compartilhe e preserve</div>
-    </div>
-</section>
-
-<section class="section">
-    <div class="section-title">
-        <h2>📍 Pontos de visitação</h2>
-        <p>Selecione um local para explorar</p>
+    <!-- IPÊ -->
+    <div class="portal-card">
+        <div class="icon">🌳</div>
+        <h2>IPÊ AMARELO</h2>
+        <p>Informações botânicas, galeria de fotos, vídeo e curiosidades da espécie.</p>
+        <a href="ipe-amarelo.html" class="portal-btn">EXPLORAR</a>
     </div>
 
-    <main class="portal">
-        <div class="card">
-            <div class="icon">🌳</div>
-            <h3>Ipê Amarelo</h3>
-            <p>Dados botânicos, curiosidades e registros da espécie.</p>
-            <a class="btn" href="ipe-amarelo.html">Explorar</a>
-        </div>
-
-        <div class="card">
-            <div class="icon">🪨</div>
-            <h3>Monumento de Pedra</h3>
-            <p>História, significado cultural e galeria de imagens.</p>
-            <a class="btn" href="monumento.html">Explorar</a>
-        </div>
-    </main>
-</section>
-
-<section class="section qr-section">
-    <div class="qr-wrap">
-        <div>
-            <h2>📱 Use seu celular</h2>
-            <p>
-                Cada ponto possui um QR Code.  
-                Basta apontar a câmera e acessar o conteúdo exclusivo.
-            </p>
-        </div>
-
-        <div class="qr-box">
-            <strong>Exemplo de QR Code</strong>
-            <div class="qr-placeholder"></div>
-            <small>Escaneie para abrir uma página informativa</small>
-        </div>
+    <!-- MONUMENTO -->
+    <div class="portal-card stone">
+        <div class="icon">🗿</div>
+        <h2>MONUMENTO</h2>
+        <p>História, significado cultural e registros visuais do monumento.</p>
+        <a href="monumento.html" class="portal-btn stone">EXPLORAR</a>
     </div>
-</section>
+
+</main>
 
 <footer>
-    © 2026 • Projeto Ambiental — Setor de Paisagismo • Desenvolvido por Tiago Santos do Carmo
+© 2026 • Tiago Santos do Carmo • Setor de Paisagismo
 </footer>
 
 </body>
