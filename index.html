@@ -5,6 +5,7 @@
 <title>🌿 Portal Ambiental</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0b2b16">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
@@ -14,51 +15,85 @@ body{background:#071b12;color:#eafff1}
 /* HERO */
 .hero{
   min-height:90vh;
-  background:linear-gradient(to bottom,rgba(0,0,0,.4),#071b12),
-  url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1800") center/cover;
+  background:
+    linear-gradient(to bottom,rgba(0,0,0,.45),#071b12),
+    url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1800") center/cover;
   display:flex;align-items:center;
 }
 .hero-content{padding:80px 8vw;max-width:760px}
-.hero-logo{width:120px;margin-bottom:20px}
-.hero h1{letter-spacing:.2em;color:#8dffd1}
-.hero p{opacity:.9;margin-top:12px}
-
-/* STATS */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;padding:60px 8vw;text-align:center}
-.stat{background:#0e2f20;border-radius:18px;padding:30px}
-.stat b{font-size:2rem;color:#7cffb2}
-
-/* MAPA */
-.map{padding:40px 8vw}
-.map-box{position:relative;border-radius:24px;overflow:hidden}
-.map-box img{width:100%}
-.point{
-  position:absolute;width:22px;height:22px;border-radius:50%;
-  background:#7cffb2;cursor:pointer;
-  box-shadow:0 0 18px #7cffb2;
-}
-.point::after{
-  content:"";position:absolute;inset:-8px;border-radius:50%;
-  border:2px solid #7cffb2;animation:pulse 1.5s infinite;
-}
-@keyframes pulse{to{transform:scale(1.8);opacity:0}}
-
-/* ACTIONS */
-.actions{text-align:center;padding:40px}
-.actions button{
-  margin:10px;padding:14px 26px;border-radius:40px;border:none;
-  background:#7cffb2;font-weight:600;cursor:pointer;
-}
+.hero-logo{width:110px;margin-bottom:20px}
+.hero h1{letter-spacing:.22em;color:#8dffd1;font-size:2.2rem}
+.hero p{opacity:.9;margin-top:14px;line-height:1.6}
 
 /* PORTAL */
-.portal{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:30px;padding:60px 8vw}
-.card{background:#0e2f20;padding:30px;border-radius:22px;text-align:center}
-.card a{display:inline-block;margin-top:10px;color:#7cffb2;text-decoration:none}
+.portal{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+  padding:70px 8vw;
+}
+.card{
+  background:#0e2f20;
+  padding:34px;
+  border-radius:22px;
+  text-align:center;
+  transition:.3s;
+}
+.card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.card h3{color:#7cffb2;margin-bottom:10px}
+.card a{
+  display:inline-block;
+  margin-top:14px;
+  padding:12px 26px;
+  border-radius:30px;
+  background:#7cffb2;
+  color:#003b22;
+  text-decoration:none;
+  font-weight:600;
+}
 
-/* CAMERA */
-#cameraBox{display:none;text-align:center;padding:40px}
-#cameraBox video{width:100%;max-width:420px;border-radius:18px}
+/* CHATBOT */
+.chatbot-btn{
+  position:fixed;right:20px;bottom:20px;
+  background:#7cffb2;color:#003b22;
+  border:none;border-radius:50%;
+  width:60px;height:60px;
+  font-size:26px;cursor:pointer;
+  box-shadow:0 0 20px rgba(124,255,178,.8);
+}
+
+.chatbox{
+  position:fixed;right:20px;bottom:90px;
+  width:320px;max-height:420px;
+  background:#0e2f20;border-radius:18px;
+  display:none;flex-direction:column;
+  overflow:hidden;border:1px solid #2f6b4f;
+}
+
+.chat-header{
+  padding:12px;text-align:center;
+  background:#0b2418;font-weight:600;
+}
+
+.chat-messages{
+  flex:1;padding:12px;overflow-y:auto;font-size:.9rem;
+}
+
+.msg{margin-bottom:10px}
+.bot{color:#7cffb2}
+.user{text-align:right;color:#fff}
+
+.chat-input{
+  display:flex;border-top:1px solid #2f6b4f;
+}
+.chat-input input{
+  flex:1;padding:10px;border:none;outline:none;
+  background:#0e2f20;color:#fff;
+}
+.chat-input button{
+  background:#7cffb2;border:none;padding:0 16px;
+  cursor:pointer;font-weight:600;
+}
 </style>
 </head>
 
@@ -66,68 +101,84 @@ gap:30px;padding:60px 8vw}
 
 <section class="hero">
   <div class="hero-content">
-    <img src="assets/img/logo.png" class="hero-logo">
+    <!-- se quiser usar sua logo depois, troca o src -->
+    <!-- <img src="assets/img/logo.png" class="hero-logo"> -->
     <h1>PORTAL AMBIENTAL</h1>
-    <p>Explore a praça usando QR Codes e mapa interativo.</p>
+    <p>
+      Conheça as árvores e monumentos da praça.<br>
+      Educação ambiental simples, direta e acessível.
+    </p>
   </div>
 </section>
-
-<section class="stats">
-  <div class="stat"><b id="t1">0</b><p>Árvores</p></div>
-  <div class="stat"><b id="t2">0</b><p>Pontos culturais</p></div>
-  <div class="stat"><b>100%</b><p>Educação</p></div>
-</section>
-
-<section class="map">
-  <h2>Mapa da Praça</h2><br>
-  <div class="map-box">
-    <img src="assets/img/mapa-praca.jpg">
-    <div class="point" style="top:45%;left:30%" onclick="go('ipe-amarelo.html')"></div>
-    <div class="point" style="top:55%;left:60%" onclick="go('monumento.html')"></div>
-  </div>
-</section>
-
-<div class="actions">
-  <button onclick="toggleAudio()">🎧 Áudio-Guia</button>
-  <button onclick="openCamera()">📸 Câmera</button>
-</div>
-
-<div id="cameraBox">
-  <h3>Câmera ativa</h3><br>
-  <video id="video" autoplay></video><br><br>
-  <button onclick="closeCamera()">Fechar</button>
-</div>
 
 <section class="portal">
-  <div class="card"><h3>🌳 Ipê Amarelo</h3><a href="ipe-amarelo.html">Explorar</a></div>
-  <div class="card"><h3>🗿 Monumento</h3><a href="monumento.html">Explorar</a></div>
+  <div class="card">
+    <h3>🌳 Ipê Amarelo</h3>
+    <p>Informações botânicas e curiosidades.</p>
+    <a href="ipe-amarelo.html">Explorar</a>
+  </div>
+
+  <div class="card">
+    <h3>🗿 Monumento</h3>
+    <p>História e significado cultural.</p>
+    <a href="monumento.html">Explorar</a>
+  </div>
 </section>
 
-<audio id="audio" src="assets/audio/guia.mp3"></audio>
+<!-- BOTÃO CHAT -->
+<button class="chatbot-btn" onclick="toggleChat()">💬</button>
+
+<!-- CHATBOX -->
+<div class="chatbox" id="chatbox">
+  <div class="chat-header">Assistente Ambiental 🌿</div>
+  <div class="chat-messages" id="messages">
+    <div class="msg bot">Olá! Pergunte sobre a praça, árvores ou monumentos.</div>
+  </div>
+  <div class="chat-input">
+    <input id="userInput" placeholder="Digite sua pergunta...">
+    <button onclick="sendMsg()">Enviar</button>
+  </div>
+</div>
 
 <script>
-function animate(id,target){
- let n=0,el=document.getElementById(id);
- let i=setInterval(()=>{n++;el.textContent=n;if(n>=target)clearInterval(i)},30);
+function toggleChat(){
+  const c=document.getElementById("chatbox");
+  c.style.display = c.style.display==="flex" ? "none" : "flex";
 }
-animate("t1",28); animate("t2",5);
 
-function go(p){location.href=p}
-
-const audio=document.getElementById("audio");
-function toggleAudio(){ audio.paused?audio.play():audio.pause(); }
-
-let stream;
-async function openCamera(){
- const v=document.getElementById("video");
- stream=await navigator.mediaDevices.getUserMedia({video:true});
- v.srcObject=stream;
- document.getElementById("cameraBox").style.display="block";
+function addMsg(text,cls){
+  const div=document.createElement("div");
+  div.className="msg "+cls;
+  div.innerText=text;
+  document.getElementById("messages").appendChild(div);
+  document.getElementById("messages").scrollTop=9999;
 }
-function closeCamera(){
- stream.getTracks().forEach(t=>t.stop());
- document.getElementById("cameraBox").style.display="none";
+
+/* === MVP "TREINADO" COM REGRAS === */
+function botReply(q){
+  q=q.toLowerCase();
+
+  if(q.includes("ipê")) return "O Ipê Amarelo é nativo do Brasil e floresce no inverno.";
+  if(q.includes("monumento")) return "O monumento representa a história e identidade da comunidade.";
+  if(q.includes("qr")) return "Os QR Codes levam direto às páginas educativas do portal.";
+  if(q.includes("praça")) return "A praça é um espaço de lazer, cultura e preservação ambiental.";
+  if(q.includes("árvore")) return "As árvores ajudam no clima, na sombra e na qualidade do ar.";
+
+  return "Ainda estou aprendendo 😊. Tente perguntar sobre árvores, praça ou monumento.";
 }
+
+function sendMsg(){
+  const input=document.getElementById("userInput");
+  if(!input.value) return;
+
+  addMsg(input.value,"user");
+  const r=botReply(input.value);
+  setTimeout(()=>addMsg(r,"bot"),400);
+  input.value="";
+}
+
+document.getElementById("userInput")
+  .addEventListener("keypress",e=>{if(e.key==="Enter")sendMsg()});
 </script>
 
 </body>
