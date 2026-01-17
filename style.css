@@ -1,37 +1,43 @@
-/* ================= HERO EXPOSIÇÃO ================= */
+/* ================= HERO EXPOSIÇÃO PRO ================= */
 
 .hero{
     position:relative;
-    min-height:72vh;
-    background:url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1600") center/cover no-repeat;
+    min-height:78vh;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(0,255,198,.25), transparent 50%),
+        linear-gradient(to right, rgba(0,0,0,.65), rgba(0,0,0,.25)),
+        url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1800")
+        center/cover no-repeat;
     display:flex;
     align-items:center;
+    overflow:hidden;
 }
 
-.hero::after{
+.hero::before{
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(to right, rgba(0,0,0,.65), rgba(0,0,0,.25));
+    background:
+        radial-gradient(circle at 80% 20%, rgba(127,208,255,.18), transparent 55%);
+    mix-blend-mode:screen;
 }
 
 .hero-content{
     position:relative;
-    padding:clamp(60px,8vw,120px) 8vw;
-    max-width:720px;
-    text-align:left;
+    padding:clamp(60px,8vw,130px) 8vw;
+    max-width:760px;
 }
 
 .hero h1{
-    font-size:clamp(2.4rem,5vw,3.3rem);
-    letter-spacing:0.22em;
+    font-size:clamp(2.6rem,5vw,3.6rem);
+    letter-spacing:.22em;
     background:linear-gradient(90deg,#00ffc6,#7fd0ff,#00ffc6);
     background-size:300%;
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
-    animation:titleFlow 6s linear infinite;
-    text-wrap:balance;
+    animation:titleFlow 7s linear infinite;
+    text-shadow:0 0 18px rgba(0,255,198,.35);
 }
 
 @keyframes titleFlow{
@@ -41,32 +47,34 @@
 
 .hero p{
     max-width:560px;
-    margin-top:18px;
-    font-size:1.05rem;
-    opacity:.92;
-    line-height:1.6;
+    margin-top:22px;
+    font-size:1.08rem;
+    opacity:.95;
+    line-height:1.7;
     color:#eaffff;
 }
 
 /* ================= MISSÃO ================= */
 
 .mission{
-    padding:90px clamp(20px,8vw,120px);
+    padding:110px clamp(20px,8vw,130px);
     text-align:center;
+    background:
+        radial-gradient(circle at top, rgba(47,107,79,.08), transparent 60%);
 }
 
 .mission h2{
-    font-size:1.9rem;
-    letter-spacing:.12em;
-    margin-bottom:14px;
+    font-size:2rem;
+    letter-spacing:.14em;
+    margin-bottom:18px;
     color:#2f6b4f;
 }
 
 .mission p{
-    max-width:900px;
+    max-width:920px;
     margin:auto;
     color:#445;
-    line-height:1.7;
+    line-height:1.8;
 }
 
 /* ================= PORTAL GRID ================= */
@@ -74,104 +82,106 @@
 .portal{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:clamp(30px,5vw,50px);
-    padding:clamp(40px,6vw,80px) clamp(20px,6vw,90px);
+    gap:clamp(34px,5vw,60px);
+    padding:clamp(40px,6vw,90px) clamp(20px,7vw,110px);
 }
 
-/* ================= CARD BASE (TEU ESTILO) ================= */
+/* ================= CARD GLASS PRO ================= */
 
 .portal-card{
     position:relative;
-    background:rgba(255,255,255,.08);
-    border-radius:26px;
-    padding:42px 34px;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.04));
+    border-radius:28px;
+    padding:46px 36px;
     text-align:center;
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
     overflow:hidden;
     border:1px solid rgba(0,255,198,.28);
     transition:
-        transform .45s cubic-bezier(.2,.8,.2,1),
-        box-shadow .45s ease,
-        border-color .45s ease;
+        transform .55s cubic-bezier(.2,.8,.2,1),
+        box-shadow .55s ease;
     box-shadow:
-        0 0 40px rgba(0,255,198,.18),
-        inset 0 0 25px rgba(0,255,198,.06);
+        0 20px 60px rgba(0,0,0,.15),
+        inset 0 0 35px rgba(0,255,198,.08);
 }
 
-/* HOLOGRAPHIC BORDER */
+/* Borda holográfica */
 .portal-card::before{
     content:"";
     position:absolute;
     inset:-2px;
     border-radius:inherit;
-    background:linear-gradient(120deg,transparent,rgba(0,255,198,.65),transparent);
+    background:linear-gradient(120deg,transparent,rgba(0,255,198,.7),transparent);
     opacity:0;
     transition:.5s ease;
     pointer-events:none;
 }
 
-/* LIGHT SWEEP */
+/* Reflexo dinâmico */
 .portal-card::after{
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(120deg,transparent,rgba(255,255,255,.18),transparent);
-    transform:translateX(-140%);
-    transition:.9s ease;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.25),transparent);
+    transform:translateX(-150%);
+    transition:1s ease;
     pointer-events:none;
 }
 
 .portal-card:hover::before{opacity:1}
-.portal-card:hover::after{transform:translateX(140%)}
+.portal-card:hover::after{transform:translateX(150%)}
 
 .portal-card:hover{
-    transform:translateY(-12px) scale(1.05);
+    transform:translateY(-14px) scale(1.06);
     box-shadow:
-        0 0 80px rgba(0,255,198,.5),
-        inset 0 0 35px rgba(0,255,198,.14);
+        0 35px 90px rgba(0,255,198,.45),
+        inset 0 0 45px rgba(0,255,198,.18);
 }
 
-/* VARIANTE STONE */
+/* ===== VARIANTE STONE ===== */
 
 .portal-card.stone{
     border-color:rgba(127,208,255,.35);
     box-shadow:
-        0 0 40px rgba(127,208,255,.25),
-        inset 0 0 22px rgba(127,208,255,.08);
+        0 20px 60px rgba(0,0,0,.18),
+        inset 0 0 30px rgba(127,208,255,.12);
 }
 
 .portal-card.stone::before{
-    background:linear-gradient(120deg,transparent,rgba(127,208,255,.65),transparent);
+    background:linear-gradient(120deg,transparent,rgba(127,208,255,.7),transparent);
 }
 
 .portal-card.stone:hover{
     box-shadow:
-        0 0 80px rgba(127,208,255,.55),
-        inset 0 0 35px rgba(127,208,255,.15);
+        0 35px 90px rgba(127,208,255,.5),
+        inset 0 0 45px rgba(127,208,255,.2);
 }
 
 /* ================= CONTENT ================= */
 
 .icon{
-    font-size:64px;
-    margin-bottom:18px;
-    filter:drop-shadow(0 0 12px rgba(0,255,198,.6));
+    font-size:66px;
+    margin-bottom:22px;
+    filter:
+        drop-shadow(0 0 14px rgba(0,255,198,.6))
+        drop-shadow(0 0 28px rgba(0,255,198,.25));
 }
 
 .portal-card h3{
     color:#00ffc6;
-    letter-spacing:.1em;
-    margin-bottom:12px;
+    letter-spacing:.12em;
+    margin-bottom:14px;
 }
 
 .portal-card.stone h3{color:#7fd0ff}
 
 .portal-card p{
-    font-size:.95rem;
-    opacity:.9;
-    margin-bottom:30px;
-    line-height:1.6;
+    font-size:.96rem;
+    opacity:.92;
+    margin-bottom:34px;
+    line-height:1.65;
 }
 
 /* ================= BUTTON ================= */
@@ -180,59 +190,85 @@
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    padding:15px 36px;
-    border-radius:50px;
+    padding:16px 40px;
+    border-radius:60px;
     text-decoration:none;
     font-weight:700;
-    letter-spacing:1.2px;
+    letter-spacing:1.3px;
     background:linear-gradient(135deg,#00ffc6,#00bfa5);
     color:#003333;
-    box-shadow:0 0 24px rgba(0,255,198,.75);
-    transition:.28s ease;
+    box-shadow:
+        0 0 28px rgba(0,255,198,.8),
+        inset 0 0 10px rgba(255,255,255,.35);
+    transition:.3s ease;
 }
 
 .portal-btn:hover{
-    transform:scale(1.12);
-    box-shadow:0 0 46px rgba(0,255,198,1);
-    filter:brightness(1.08);
+    transform:scale(1.14);
+    box-shadow:
+        0 0 55px rgba(0,255,198,1),
+        inset 0 0 16px rgba(255,255,255,.45);
 }
+
+/* ===== BUTTON STONE ===== */
 
 .portal-btn.stone{
     background:linear-gradient(135deg,#7fd0ff,#4db8ff);
     color:#002033;
-    box-shadow:0 0 24px rgba(127,208,255,.75);
+    box-shadow:
+        0 0 28px rgba(127,208,255,.8),
+        inset 0 0 10px rgba(255,255,255,.4);
 }
 
 .portal-btn.stone:hover{
-    box-shadow:0 0 46px rgba(127,208,255,1);
+    box-shadow:
+        0 0 55px rgba(127,208,255,1),
+        inset 0 0 16px rgba(255,255,255,.45);
 }
 
 /* ================= QR SECTION ================= */
 
 .qr-section{
-    background:linear-gradient(135deg,#1f4030,#2f6b4f);
-    padding:90px clamp(20px,8vw,120px);
+    background:
+        radial-gradient(circle at top, rgba(0,255,198,.25), transparent 55%),
+        linear-gradient(135deg,#1f4030,#2f6b4f);
+    padding:110px clamp(20px,8vw,130px);
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:50px;
+    gap:60px;
     align-items:center;
     color:#eaffff;
 }
 
 .qr-box{
-    background:rgba(255,255,255,.1);
-    backdrop-filter:blur(12px);
-    padding:30px;
-    border-radius:22px;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(14px);
+    padding:34px;
+    border-radius:26px;
     text-align:center;
-    border:1px solid rgba(255,255,255,.25);
+    border:1px solid rgba(255,255,255,.35);
+    position:relative;
+}
+
+.qr-box::after{
+    content:"";
+    position:absolute;
+    inset:-8px;
+    border-radius:inherit;
+    border:2px solid rgba(0,255,198,.7);
+    animation:pulse 2.2s infinite;
+}
+
+@keyframes pulse{
+    0%{opacity:.9}
+    100%{opacity:0}
 }
 
 .qr-placeholder{
-    width:190px;
-    height:190px;
-    margin:18px auto;
-    border-radius:14px;
+    width:200px;
+    height:200px;
+    margin:22px auto;
+    border-radius:16px;
     background:
         repeating-linear-gradient(45deg,#eee,#eee 10px,#bbb 10px,#bbb 20px);
 }
@@ -240,7 +276,7 @@
 /* ================= MOBILE ================= */
 
 @media(max-width:480px){
-    .icon{font-size:54px}
-    .portal-btn{padding:13px 28px}
+    .icon{font-size:56px}
+    .portal-btn{padding:14px 30px}
     .hero h1{letter-spacing:.14em}
 }
