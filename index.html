@@ -21,7 +21,6 @@ body{background:#071b12;color:#eafff1}
   display:flex;align-items:center;
 }
 .hero-content{padding:80px 8vw;max-width:760px}
-.hero-logo{width:110px;margin-bottom:20px}
 .hero h1{letter-spacing:.22em;color:#8dffd1;font-size:2.2rem}
 .hero p{opacity:.9;margin-top:14px;line-height:1.6}
 
@@ -83,6 +82,8 @@ body{background:#071b12;color:#eafff1}
 .bot{color:#7cffb2}
 .user{text-align:right;color:#fff}
 
+.typing{font-style:italic;opacity:.7}
+
 .chat-input{
   display:flex;border-top:1px solid #2f6b4f;
 }
@@ -101,8 +102,6 @@ body{background:#071b12;color:#eafff1}
 
 <section class="hero">
   <div class="hero-content">
-    <!-- se quiser usar sua logo depois, troca o src -->
-    <!-- <img src="assets/img/logo.png" class="hero-logo"> -->
     <h1>PORTAL AMBIENTAL</h1>
     <p>
       Conheça as árvores e monumentos da praça.<br>
@@ -130,9 +129,12 @@ body{background:#071b12;color:#eafff1}
 
 <!-- CHATBOX -->
 <div class="chatbox" id="chatbox">
-  <div class="chat-header">Assistente Ambiental Aur-ia </div>
+  <div class="chat-header">🌿 Auria — Assistente Ambiental</div>
   <div class="chat-messages" id="messages">
-    <div class="msg bot">Olá!Eu sou a Auria e ainda estou em treinamento Pergunte sobre a praça, árvores ou monumentos.</div>
+    <div class="msg bot">
+      Olá! Eu sou a Auria 🌱, criada por Tiago Santos do Carmo.  
+      Ainda estou em treinamento. Pergunte sobre árvores, jardins, praça ou monumento.
+    </div>
   </div>
   <div class="chat-input">
     <input id="userInput" placeholder="Digite sua pergunta...">
@@ -143,131 +145,68 @@ body{background:#071b12;color:#eafff1}
 <script>
 function toggleChat(){
   const c=document.getElementById("chatbox");
+  const i=document.getElementById("userInput");
   c.style.display = c.style.display==="flex" ? "none" : "flex";
+  setTimeout(()=>i.focus(),200);
 }
 
 function addMsg(text,cls){
   const div=document.createElement("div");
   div.className="msg "+cls;
   div.innerText=text;
-  document.getElementById("messages").appendChild(div);
-  document.getElementById("messages").scrollTop=9999;
+  const box=document.getElementById("messages");
+  box.appendChild(div);
+  box.scrollTop=box.scrollHeight;
 }
 
-/* =====================================================
-   AURIA v3 — GUIA AMBIENTAL | PAISAGISMO COMPLETO
-   Criada por Tiago Santos do Carmo — MVP Educacional
-===================================================== */
+/* ===== AURIA v3 — MOTOR DE RESPOSTAS ===== */
 
 function botReply(q){
 
-  if(!q) return "Pode perguntar 🌿 Posso falar sobre jardins, árvores, monumento, praça e meio ambiente.";
+  if(!q) return "Pode perguntar 🌿";
 
   q = q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-  /* ================= IDENTIDADE ================= */
+  if(q.includes("auria") || q.includes("quem e voce"))
+    return "Sou a Auria, assistente ambiental do Portal, criada por Tiago Santos do Carmo.";
 
-  if(q.includes("auria") || q.includes("quem e voce") || q.includes("quem é voce"))
-    return "Sou a Auria 🌱, assistente do Portal Ambiental, criada por Tiago Santos do Carmo e em treinamento contínuo.";
+  if(q.includes("tiago") || q.includes("criador"))
+    return "Fui desenvolvida por Tiago Santos do Carmo como projeto educacional.";
 
-  if(q.includes("criador") || q.includes("quem te criou") || q.includes("tiago"))
-    return "Fui desenvolvida por Tiago Santos do Carmo como parte de um projeto educativo de paisagismo e cidadania.";
-
-  if(q.includes("projeto"))
-    return "Este projeto usa QR Codes, site interativo e a Auria para educação ambiental em espaços públicos.";
-
-  /* ================= PAISAGISMO ORIENTAL ================= */
-
-  if(q.includes("jardim japones") || q.includes("japones") || q.includes("oriental"))
-    return "O paisagismo oriental busca harmonia com a natureza, usando pedras, água, musgos, árvores podadas e caminhos curvos.";
+  if(q.includes("jardim japones") || q.includes("oriental"))
+    return "O jardim japonês busca harmonia, usando pedras, água, árvores podadas e caminhos curvos.";
 
   if(q.includes("zen"))
-    return "O jardim zen usa areia, pedras e poucos elementos para meditação e equilíbrio mental.";
+    return "Jardins zen usam areia e pedras para representar montanhas e rios.";
 
   if(q.includes("bonsai"))
-    return "Bonsai é a arte de cultivar árvores em miniatura, mantendo forma e proporção naturais.";
+    return "Bonsai é a arte de cultivar árvores em miniatura.";
 
-  if(q.includes("lanterna") || q.includes("torii"))
-    return "Elementos como lanternas de pedra e portais simbolizam iluminação e transição espiritual nos jardins orientais.";
-
-  if(q.includes("cerejeira") || q.includes("sakura"))
-    return "A cerejeira simboliza a beleza passageira da vida e é muito usada em jardins japoneses.";
-
-  /* ================= PAISAGISMO OCIDENTAL ================= */
-
-  if(q.includes("jardim europeu") || q.includes("europeu") || q.includes("classico") || q.includes("formal"))
-    return "O paisagismo europeu é simétrico, com canteiros geométricos, gramados amplos e caminhos retos.";
-
-  if(q.includes("roseira") || q.includes("rosas"))
-    return "Rosas são comuns em jardins clássicos e simbolizam beleza e cuidado no paisagismo.";
+  if(q.includes("jardim europeu") || q.includes("classico"))
+    return "O jardim europeu é simétrico, com canteiros geométricos e gramados amplos.";
 
   if(q.includes("topiaria"))
-    return "Topiaria é a técnica de podar plantas em formas geométricas ou artísticas.";
-
-  if(q.includes("canteiros"))
-    return "Canteiros organizam as espécies e facilitam manutenção e irrigação.";
-
-  /* ================= PAISAGISMO URBANO ================= */
-
-  if(q.includes("praca") || q.includes("urbano"))
-    return "O paisagismo urbano melhora conforto térmico, valoriza o espaço e promove convivência social.";
-
-  if(q.includes("sombra"))
-    return "Árvores de sombra reduzem a temperatura e protegem contra o sol.";
-
-  if(q.includes("acessibilidade"))
-    return "Caminhos devem ser acessíveis, com rampas e pisos regulares para todos.";
-
-  if(q.includes("bancos") || q.includes("descanso"))
-    return "Áreas de descanso devem ficar próximas a árvores e locais tranquilos.";
-
-  if(q.includes("iluminacao"))
-    return "Iluminação valoriza o paisagismo e aumenta a segurança à noite.";
-
-  /* ================= ARBORIZAÇÃO ================= */
+    return "Topiaria é a poda artística em formas geométricas.";
 
   if(q.includes("arvore"))
-    return "Árvores ajudam no clima, na biodiversidade, na sombra e na qualidade do ar.";
-
-  if(q.includes("nativa"))
-    return "Plantas nativas são mais resistentes e preservam a fauna local.";
-
-  if(q.includes("floracao"))
-    return "A floração atrai polinizadores e embeleza o ambiente urbano.";
-
-  if(q.includes("poda"))
-    return "Podas devem ser feitas de forma correta para não prejudicar a planta.";
-
-  /* ================= MEIO AMBIENTE ================= */
-
-  if(q.includes("meio ambiente") || q.includes("sustentavel"))
-    return "Paisagismo sustentável usa espécies adequadas e reduz consumo de água.";
-
-  if(q.includes("agua"))
-    return "Uso consciente da água é essencial em projetos ambientais.";
-
-  if(q.includes("reciclagem"))
-    return "Reciclagem reduz impacto ambiental e ajuda a preservar recursos naturais.";
-
-  /* ================= EDUCAÇÃO / QR ================= */
-
-  if(q.includes("qr") || q.includes("qrcode"))
-    return "Os QR Codes conectam visitantes a informações educativas direto no celular.";
-
-  if(q.includes("educacao"))
-    return "Educação ambiental ajuda a criar consciência ecológica na comunidade.";
-
-  /* ================= ITENS DA PRAÇA ================= */
+    return "Árvores ajudam no clima, na sombra e na qualidade do ar.";
 
   if(q.includes("ipe"))
-    return "O Ipê Amarelo é uma árvore nativa do Brasil, famosa pela floração intensa no inverno.";
+    return "O Ipê Amarelo é uma árvore nativa do Brasil, famosa pela floração no inverno.";
 
   if(q.includes("monumento"))
-    return "O monumento é um marco cultural e histórico da praça.";
+    return "O monumento é um marco histórico e cultural da praça.";
 
-  /* ================= DEFAULT ================= */
+  if(q.includes("praca"))
+    return "A praça é um espaço de lazer, convivência e educação ambiental.";
 
-  return "Ainda estou em treinamento 🌱. Pergunte sobre jardins japoneses, paisagismo europeu, árvores, praça ou meio ambiente.";
+  if(q.includes("agua"))
+    return "Uso consciente da água é essencial em projetos sustentáveis.";
+
+  if(q.includes("reciclagem"))
+    return "Reciclar reduz impacto ambiental e preserva recursos naturais.";
+
+  return "Ainda estou aprendendo 🌱. Pergunte sobre jardins, árvores, praça ou monumento.";
 }
 
 function sendMsg(){
@@ -275,13 +214,23 @@ function sendMsg(){
   if(!input.value) return;
 
   addMsg(input.value,"user");
-  const r=botReply(input.value);
-  setTimeout(()=>addMsg(r,"bot"),400);
+
+  const typing=document.createElement("div");
+  typing.className="msg bot typing";
+  typing.innerText="Auria está digitando...";
+  document.getElementById("messages").appendChild(typing);
+
+  setTimeout(()=>{
+    typing.remove();
+    const r=botReply(input.value);
+    addMsg(r,"bot");
+  },500);
+
   input.value="";
 }
 
 document.getElementById("userInput")
-  .addEventListener("keypress",e=>{if(e.key==="Enter")sendMsg()});
+  .addEventListener("keydown",e=>{if(e.key==="Enter")sendMsg()});
 </script>
 
 </body>
