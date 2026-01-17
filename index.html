@@ -173,68 +173,187 @@ function normalize(t){
     .trim();
 }
 
-/* ===== AURIA MVP — MOTOR ===== */
+/* ===== AURIA MVP — MOTOR TURBINADO ===== */
 function botReply(q){
 
   if(!q || !q.trim())
     return "Pode mandar a pergunta 🌿 Posso falar de árvores, jardins, meio ambiente, praça ou monumentos.";
 
-  q=normalize(q);
-  q=q.replace("jardin","jardim").replace("jardims","jardins");
+  q = normalize(q);
+  q = q.replace("jardin","jardim").replace("jardims","jardins");
 
   let r;
 
-  if(/\b(me fala mais|mais disso|continua)\b/.test(q)){
-    if(lastTopic==="jardins") return "Nos jardins também é importante pensar em sombra, irrigação e plantas certas.";
-    if(lastTopic==="arvores") return "Árvores ajudam no clima e servem de abrigo para aves.";
-    if(lastTopic==="monumentos") return "Monumentos fortalecem a identidade cultural.";
-    if(lastTopic==="meioambiente") return "Pequenas atitudes fazem muita diferença.";
+  /* ================= CONTINUIDADE / CONTEXTO ================= */
+  if(/\b(me fala mais|mais disso|continua|detalha|explica mais|e depois)\b/.test(q)){
+    if(lastTopic==="jardins")
+      return "Além da estética, jardins ajudam a reduzir calor, melhorar o ar e trazer bem-estar para as pessoas.";
+
+    if(lastTopic==="arvores")
+      return "Algumas árvores também ajudam a filtrar poluição e reduzir barulho da rua.";
+
+    if(lastTopic==="monumentos")
+      return "Eles também são usados em eventos culturais e ajudam a manter viva a memória do lugar.";
+
+    if(lastTopic==="meioambiente")
+      return "Separar lixo, economizar água e respeitar áreas verdes já faz muita diferença.";
+
+    return "Sobre qual assunto você quer saber mais? 🌿";
   }
 
-  if(/\b(oi+|ola+|eai+|opa|salve|fala|hey)\b/.test(q)){
-    r=["Oi 😄 em que posso ajudar?","E aí 🌱 bora falar de natureza?","Olá 🌿 pergunta aí!"];
+  /* ================= CONFIRMAÇÕES ================= */
+  if(/\b(sim|claro|ok|beleza|entendi|pode ser|isso)\b/.test(q)){
+    return "Show 😄 então manda a próxima pergunta! Quer falar de árvores, jardins, praça ou meio ambiente?";
+  }
+
+  /* ================= CUMPRIMENTOS ================= */
+  if(/\b(oi+|ola+|eai+|opa|salve|fala|hey|bom dia|boa tarde|boa noite)\b/.test(q)){
+    r=[
+      "Oi! 😄 Em que posso te ajudar hoje?",
+      "E aí! 🌱 Bora aprender algo sobre a natureza?",
+      "Olá! 🌿 Quer saber sobre árvores, jardins ou a praça?",
+      "Salve! 😎 Pergunta aí que eu te respondo!",
+      "Hey! 🌍 O que vamos explorar hoje?"
+    ];
     return r[Math.floor(Math.random()*r.length)];
   }
 
-  if(q.includes("auria")) return "Sou a Auria 🌿 assistente ambiental do portal.";
-  if(q.includes("tiago")) return "Fui criada por Tiago Santos do Carmo como projeto educacional.";
+  /* ================= IDENTIDADE ================= */
+  if(q.includes("auria") || q.includes("quem e voce"))
+    return "Sou a Auria 🌿, assistente ambiental do portal, criada para ajudar com educação ambiental.";
 
-  if(q.includes("praca")||q.includes("parque")){
+  if(q.includes("tiago") || q.includes("criador") || q.includes("quem criou"))
+    return "Fui criada por Tiago Santos do Carmo como parte de um projeto educacional.";
+
+  if(q.includes("projeto") || q.includes("portal"))
+    return "Este projeto usa site, QR Codes e a Auria para ensinar sobre natureza e história da praça.";
+
+  /* ================= PRAÇA ================= */
+  if(q.includes("praca") || q.includes("parque")){
     lastTopic="praca";
-    return "A praça é espaço de lazer, convivência e educação ambiental.";
+    r=[
+      "A praça é um espaço de lazer, convivência e educação ambiental.",
+      "Além de lazer, a praça ajuda a refrescar o clima da cidade.",
+      "Praças com árvores são mais frescas e agradáveis para todos."
+    ];
+    return r[Math.floor(Math.random()*r.length)];
   }
 
+  if(q.includes("lixo") || q.includes("sujeira")){
+    lastTopic="meioambiente";
+    return "Manter a praça limpa evita doenças e protege os animais que vivem ali.";
+  }
+
+  /* ================= ÁRVORES ================= */
   if(q.includes("ipe")){
     lastTopic="arvores";
-    return "O Ipê Amarelo é nativo do Brasil e floresce no inverno.";
+    return "O Ipê Amarelo é nativo do Brasil e floresce no inverno, deixando tudo dourado 🌼";
+  }
+
+  if(q.includes("plantar") || q.includes("por que plantar")){
+    lastTopic="arvores";
+    return "Plantar árvores melhora o ar, reduz calor e ajuda no equilíbrio do clima.";
+  }
+
+  if(q.includes("raiz")){
+    lastTopic="arvores";
+    return "As raízes seguram o solo e evitam erosão em dias de chuva.";
+  }
+
+  if(q.includes("sombra")){
+    lastTopic="arvores";
+    return "Áreas com árvores podem ser até 10°C mais frescas que áreas sem vegetação.";
   }
 
   if(q.includes("arvore")){
     lastTopic="arvores";
-    return "As árvores ajudam no clima, na água e na vida dos animais.";
+    return "As árvores ajudam no clima, na água, no ar e na vida dos animais.";
   }
 
-  if(q.includes("japones")||q.includes("oriental")){
+  /* ================= JARDINS ================= */
+  if(q.includes("japones") || q.includes("oriental")){
     lastTopic="jardins";
-    return "O jardim japonês busca equilíbrio com pedras, água e plantas.";
+    return "O jardim japonês busca equilíbrio usando pedras, água e plantas bem posicionadas.";
+  }
+
+  if(q.includes("europeu") || q.includes("classico")){
+    lastTopic="jardins";
+    return "O jardim europeu é organizado, simétrico e cheio de formas geométricas.";
+  }
+
+  if(q.includes("zen")){
+    lastTopic="jardins";
+    return "O jardim zen usa areia e pedras para representar a natureza e trazer calma.";
+  }
+
+  if(q.includes("bonsai")){
+    lastTopic="jardins";
+    return "Bonsai é a arte de cultivar árvores em miniatura com muito cuidado e paciência.";
   }
 
   if(/\b(jardim|jardins)\b/.test(q)){
     lastTopic="jardins";
-    return "Existem jardins japonês, europeu e tropical. Qual quer conhecer?";
+    r=[
+      "Existem jardins japonês, europeu, tropical… qual você quer conhecer?",
+      "Jardins ajudam no bem-estar e deixam os espaços mais agradáveis 🌿",
+      "Quer saber como um jardim é planejado?"
+    ];
+    return r[Math.floor(Math.random()*r.length)];
   }
 
-  if(q.includes("meio ambiente")||q.includes("natureza")){
+  /* ================= MEIO AMBIENTE ================= */
+  if(q.includes("meio ambiente") || q.includes("natureza")){
     lastTopic="meioambiente";
-    return "Cuidar do meio ambiente é proteger água, ar e solo.";
+    return "Cuidar do meio ambiente é proteger água, ar, solo e todos os seres vivos.";
   }
 
-  if(q.includes("monumento")){
+  if(q.includes("reciclagem") || q.includes("reciclar")){
+    lastTopic="meioambiente";
+    return "Reciclar reduz lixo, economiza energia e preserva recursos naturais.";
+  }
+
+  if(q.includes("agua")){
+    lastTopic="meioambiente";
+    return "Economizar água hoje garante água para o futuro 💧";
+  }
+
+  if(q.includes("poluicao") || q.includes("lixo no ar")){
+    lastTopic="meioambiente";
+    return "A poluição prejudica pessoas, animais e plantas, por isso precisamos reduzir emissões.";
+  }
+
+  /* ================= MONUMENTOS ================= */
+  if(q.includes("monumento") || q.includes("estatua")){
     lastTopic="monumentos";
-    return "Monumentos preservam a história da comunidade.";
+    return "Monumentos preservam a história e a identidade cultural da comunidade.";
   }
 
-  return "Hmm 🤔 não entendi, mas posso falar de árvores, jardins, praça, meio ambiente e monumentos.";
+  if(q.includes("historia")){
+    lastTopic="monumentos";
+    return "Conhecer a história do lugar ajuda a valorizar a cultura local.";
+  }
+
+  /* ================= AJUDA ================= */
+  if(q.includes("ajuda") || q.includes("o que perguntar")){
+    return "Você pode perguntar sobre árvores, jardins, meio ambiente, praça e monumentos 🌿";
+  }
+
+  if(q.includes("obrigado") || q.includes("valeu")){
+    r=[
+      "De nada! 🌱 Sempre por aqui.",
+      "Tamo junto 😄 qualquer coisa é só chamar!",
+      "Disponha! 🌿 fico feliz em ajudar."
+    ];
+    return r[Math.floor(Math.random()*r.length)];
+  }
+
+  /* ================= FALLBACK INTELIGENTE ================= */
+  r=[
+    "Não entendi direitinho 🤔 tenta perguntar sobre árvores, jardins, praça ou meio ambiente.",
+    "Hmm… pode reformular? Posso falar de natureza, jardins e monumentos 🌿",
+    "Ainda estou aprendendo 😅 mas sei bastante sobre meio ambiente e paisagismo!"
+  ];
+  return r[Math.floor(Math.random()*r.length)];
 }
 
 /* ===== ENVIO ===== */
