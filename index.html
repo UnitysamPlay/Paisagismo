@@ -15,157 +15,220 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",system-ui,sans-serif}
 
 body{
-    background:#f4f7f5;
+    background:#f3f7f5;
     color:#1f2d27;
 }
 
-/* ===== HERO ===== */
+/* ================= HERO ================= */
+
 .hero{
     position:relative;
-    min-height:70vh;
-    background:url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1600") center/cover no-repeat;
+    min-height:85vh;
+    background:url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1800") center/cover fixed no-repeat;
     display:flex;
     align-items:center;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,.35));
 }
 
 .hero::after{
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(to right, rgba(0,0,0,.55), rgba(0,0,0,.2));
+    background:radial-gradient(circle at left, rgba(0,255,198,.25), transparent 55%);
 }
 
 .hero-content{
     position:relative;
     color:#fff;
-    padding:60px 8vw;
-    max-width:700px;
+    padding:clamp(60px,8vw,120px);
+    max-width:760px;
 }
 
 .hero h1{
-    font-size:clamp(2rem,4vw,3rem);
+    font-size:clamp(2.4rem,5vw,3.4rem);
     line-height:1.2;
-    margin-bottom:15px;
+    letter-spacing:.12em;
+    background:linear-gradient(90deg,#00ffc6,#7fd0ff,#00ffc6);
+    background-size:300%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:titleFlow 6s linear infinite;
+}
+
+@keyframes titleFlow{
+    from{background-position:0%}
+    to{background-position:300%}
 }
 
 .hero p{
-    font-size:1.05rem;
+    font-size:1.1rem;
+    margin-top:18px;
     opacity:.95;
+    max-width:520px;
 }
 
-/* ===== MISSION ===== */
-.mission{
-    background:#ffffff;
-    padding:70px 8vw;
+/* ================= SECTION BASE ================= */
+
+.section{
+    padding:100px clamp(20px,8vw,120px);
+}
+
+.section-title{
     text-align:center;
+    margin-bottom:60px;
 }
 
-.mission h2{
-    font-size:1.8rem;
-    margin-bottom:15px;
+.section-title h2{
+    font-size:2rem;
     color:#2f6b4f;
+    margin-bottom:12px;
 }
 
-.mission p{
-    max-width:800px;
-    margin:auto;
+.section-title p{
     color:#555;
 }
 
-/* ===== PORTAL ===== */
-.portal{
-    padding:60px 8vw 90px;
+/* ================= STEPS ================= */
+
+.steps{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
     gap:35px;
 }
 
-.card{
-    background:rgba(255,255,255,.75);
-    backdrop-filter:blur(10px);
+.step{
+    background:#fff;
+    padding:30px;
     border-radius:22px;
-    padding:35px 28px;
-    box-shadow:0 20px 40px rgba(0,0,0,.08);
-    transition:.35s ease;
+    box-shadow:0 20px 45px rgba(0,0,0,.08);
     position:relative;
-    overflow:hidden;
 }
 
-.card::before{
+.step span{
+    position:absolute;
+    top:-18px;
+    left:20px;
+    background:#2f6b4f;
+    color:#fff;
+    padding:6px 14px;
+    border-radius:30px;
+    font-size:.8rem;
+}
+
+/* ================= PORTAL CARDS ================= */
+
+.portal{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:45px;
+}
+
+.card{
+    position:relative;
+    background:rgba(255,255,255,.7);
+    backdrop-filter:blur(12px);
+    border-radius:26px;
+    padding:42px 34px;
+    text-align:center;
+    overflow:hidden;
+    border:1px solid rgba(47,107,79,.25);
+    box-shadow:0 30px 60px rgba(0,0,0,.1);
+    transition:.45s cubic-bezier(.2,.8,.2,1);
+}
+
+.card::after{
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(120deg, transparent, rgba(47,107,79,.15), transparent);
-    opacity:0;
-    transition:.4s;
+    background:linear-gradient(120deg,transparent,rgba(47,107,79,.18),transparent);
+    transform:translateX(-130%);
+    transition:.9s;
 }
 
-.card:hover::before{opacity:1}
-.card:hover{transform:translateY(-8px)}
+.card:hover::after{transform:translateX(130%)}
+.card:hover{transform:translateY(-12px) scale(1.04)}
 
 .icon{
-    font-size:52px;
-    margin-bottom:12px;
+    font-size:60px;
+    margin-bottom:18px;
 }
 
 .card h3{
     color:#2f6b4f;
-    margin-bottom:10px;
+    margin-bottom:12px;
 }
 
 .card p{
     color:#555;
-    font-size:.95rem;
-    margin-bottom:25px;
+    margin-bottom:30px;
 }
 
 .btn{
     display:inline-block;
-    padding:12px 28px;
-    border-radius:30px;
-    background:#2f6b4f;
+    padding:14px 36px;
+    border-radius:40px;
+    background:linear-gradient(135deg,#2f6b4f,#1f4030);
     color:#fff;
     text-decoration:none;
     font-weight:600;
-    transition:.25s;
 }
 
-.btn:hover{background:#244f3c}
+/* ================= QR SECTION ================= */
 
-/* ===== QR SECTION ===== */
 .qr-section{
-    background:linear-gradient(135deg,#2f6b4f,#1f4030);
+    background:linear-gradient(135deg,#1f4030,#2f6b4f);
     color:#fff;
-    padding:70px 8vw;
+}
+
+.qr-wrap{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:40px;
+    gap:50px;
     align-items:center;
 }
 
-.qr-section h2{
-    font-size:1.8rem;
-    margin-bottom:10px;
+.qr-box{
+    background:rgba(255,255,255,.1);
+    backdrop-filter:blur(12px);
+    padding:32px;
+    border-radius:24px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,.35);
+    position:relative;
 }
 
-.qr-box{
-    background:#fff;
-    color:#333;
-    padding:25px;
-    border-radius:18px;
-    text-align:center;
-    box-shadow:0 15px 35px rgba(0,0,0,.25);
+.qr-box::after{
+    content:"";
+    position:absolute;
+    inset:-6px;
+    border-radius:inherit;
+    border:2px solid rgba(0,255,198,.6);
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%{opacity:.9}
+    100%{opacity:0}
 }
 
 .qr-placeholder{
-    width:180px;
-    height:180px;
-    margin:15px auto;
-    background:repeating-linear-gradient(45deg,#ddd,#ddd 10px,#bbb 10px,#bbb 20px);
-    border-radius:10px;
+    width:190px;
+    height:190px;
+    margin:18px auto;
+    border-radius:14px;
+    background:
+        repeating-linear-gradient(45deg,#eee,#eee 10px,#bbb 10px,#bbb 20px);
 }
 
-/* ===== FOOTER ===== */
+/* ================= FOOTER ================= */
+
 footer{
     background:#e9eeec;
     text-align:center;
@@ -180,54 +243,66 @@ footer{
 
 <section class="hero">
     <div class="hero-content">
-        <h1>Conheça, aprenda e preserve.</h1>
+        <h1>Explore. Aprenda. Preserve.</h1>
         <p>
-            Este portal conecta visitantes à história, às espécies e aos monumentos
-            do nosso espaço através de tecnologia e educação ambiental.
+            Um portal interativo que conecta visitantes à natureza,
+            história e cultura através de QR Codes espalhados pelo espaço.
         </p>
     </div>
 </section>
 
-<section class="mission">
-    <h2>🌿 Nossa Missão</h2>
-    <p>
-        Utilizar QR Codes e conteúdo digital para transformar áreas verdes em espaços
-        educativos, promovendo consciência ambiental, valorização cultural e acesso
-        à informação de forma simples e moderna.
-    </p>
+<section class="section">
+    <div class="section-title">
+        <h2>🌿 Como funciona o projeto</h2>
+        <p>Transformando a praça em um espaço educativo digital</p>
+    </div>
+
+    <div class="steps">
+        <div class="step"><span>Passo 1</span> Encontre um QR Code próximo às árvores ou monumentos</div>
+        <div class="step"><span>Passo 2</span> Aponte a câmera do celular e escaneie</div>
+        <div class="step"><span>Passo 3</span> Acesse informações, fotos e curiosidades</div>
+        <div class="step"><span>Passo 4</span> Aprenda, compartilhe e preserve</div>
+    </div>
 </section>
 
-<main class="portal">
-
-    <div class="card">
-        <div class="icon">🌳</div>
-        <h3>Ipê Amarelo</h3>
-        <p>Informações botânicas, curiosidades e registros da espécie.</p>
-        <a class="btn" href="ipe-amarelo.html">Explorar</a>
+<section class="section">
+    <div class="section-title">
+        <h2>📍 Pontos de visitação</h2>
+        <p>Selecione um local para explorar</p>
     </div>
 
-    <div class="card">
-        <div class="icon">🪨</div>
-        <h3>Monumento de Pedra</h3>
-        <p>História, significado cultural e galeria de imagens.</p>
-        <a class="btn" href="monumento.html">Explorar</a>
-    </div>
+    <main class="portal">
+        <div class="card">
+            <div class="icon">🌳</div>
+            <h3>Ipê Amarelo</h3>
+            <p>Dados botânicos, curiosidades e registros da espécie.</p>
+            <a class="btn" href="ipe-amarelo.html">Explorar</a>
+        </div>
 
-</main>
+        <div class="card">
+            <div class="icon">🪨</div>
+            <h3>Monumento de Pedra</h3>
+            <p>História, significado cultural e galeria de imagens.</p>
+            <a class="btn" href="monumento.html">Explorar</a>
+        </div>
+    </main>
+</section>
 
-<section class="qr-section">
-    <div>
-        <h2>📱 Aponte a câmera</h2>
-        <p>
-            Cada ponto da praça possui um QR Code.  
-            Escaneie e descubra informações exclusivas diretamente no seu celular.
-        </p>
-    </div>
+<section class="section qr-section">
+    <div class="qr-wrap">
+        <div>
+            <h2>📱 Use seu celular</h2>
+            <p>
+                Cada ponto possui um QR Code.  
+                Basta apontar a câmera e acessar o conteúdo exclusivo.
+            </p>
+        </div>
 
-    <div class="qr-box">
-        <strong>Exemplo de QR Code</strong>
-        <div class="qr-placeholder"></div>
-        <small>Escaneie para acessar uma página informativa</small>
+        <div class="qr-box">
+            <strong>Exemplo de QR Code</strong>
+            <div class="qr-placeholder"></div>
+            <small>Escaneie para abrir uma página informativa</small>
+        </div>
     </div>
 </section>
 
