@@ -2,128 +2,167 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-
-<title>Setor de Paisagismo • Informações Ambientais</title>
+<title>Portal Ambiental • Setor de Paisagismo</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portal ambiental interativo com acesso por QR Code para informações botânicas e culturais.">
 
-<!-- SEO Básico -->
-<meta name="description" content="Sistema de identificação ambiental via QR Code para o Setor de Paisagismo.">
-<meta name="theme-color" content="#2f6b4f">
-
-<!-- Fonte profissional -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: "Inter", system-ui, sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",system-ui,sans-serif}
 
 body{
-    background:#f5f7f6;
-    color:#2a2a2a;
-    min-height:100vh;
-    line-height:1.6;
+    background:#f4f7f5;
+    color:#1f2d27;
 }
 
-/* ===== HEADER ===== */
-header{
-    background:#2f6b4f;
+/* ===== HERO ===== */
+.hero{
+    position:relative;
+    min-height:70vh;
+    background:url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1600") center/cover no-repeat;
+    display:flex;
+    align-items:center;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to right, rgba(0,0,0,.55), rgba(0,0,0,.2));
+}
+
+.hero-content{
+    position:relative;
     color:#fff;
-    padding:60px 20px 40px;
+    padding:60px 8vw;
+    max-width:700px;
+}
+
+.hero h1{
+    font-size:clamp(2rem,4vw,3rem);
+    line-height:1.2;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:1.05rem;
+    opacity:.95;
+}
+
+/* ===== MISSION ===== */
+.mission{
+    background:#ffffff;
+    padding:70px 8vw;
     text-align:center;
 }
 
-header h1{
-    font-size:clamp(1.8rem,4vw,2.4rem);
-    margin-bottom:10px;
-    letter-spacing:0.5px;
+.mission h2{
+    font-size:1.8rem;
+    margin-bottom:15px;
+    color:#2f6b4f;
 }
 
-header p{
-    max-width:760px;
-    margin:0 auto;
-    opacity:0.95;
-}
-
-/* ===== FEATURES ===== */
-.features{
-    max-width:1100px;
-    margin:40px auto;
-    padding:0 20px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-}
-
-.feature{
-    background:#fff;
-    border:1px solid #e0e5e2;
-    border-radius:12px;
-    padding:18px;
-    text-align:center;
-    font-size:0.95rem;
+.mission p{
+    max-width:800px;
+    margin:auto;
+    color:#555;
 }
 
 /* ===== PORTAL ===== */
 .portal{
-    max-width:1100px;
-    margin:30px auto 70px;
-    padding:0 20px;
+    padding:60px 8vw 90px;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:30px;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:35px;
 }
 
-.portal-card{
-    background:#ffffff;
-    border:1px solid #e0e5e2;
-    border-radius:16px;
-    padding:30px 25px;
-    text-align:center;
-    transition:0.25s ease;
+.card{
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(10px);
+    border-radius:22px;
+    padding:35px 28px;
+    box-shadow:0 20px 40px rgba(0,0,0,.08);
+    transition:.35s ease;
+    position:relative;
+    overflow:hidden;
 }
 
-.portal-card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg, transparent, rgba(47,107,79,.15), transparent);
+    opacity:0;
+    transition:.4s;
 }
+
+.card:hover::before{opacity:1}
+.card:hover{transform:translateY(-8px)}
 
 .icon{
-    font-size:48px;
+    font-size:52px;
     margin-bottom:12px;
 }
 
-.portal-card h2{
+.card h3{
     color:#2f6b4f;
-    margin-bottom:8px;
-    font-size:1.3rem;
+    margin-bottom:10px;
 }
 
-.portal-card p{
-    font-size:0.95rem;
-    margin-bottom:22px;
+.card p{
     color:#555;
+    font-size:.95rem;
+    margin-bottom:25px;
 }
 
-.portal-btn{
+.btn{
     display:inline-block;
-    padding:12px 26px;
+    padding:12px 28px;
     border-radius:30px;
-    text-decoration:none;
-    font-weight:600;
     background:#2f6b4f;
     color:#fff;
-    transition:0.25s ease;
+    text-decoration:none;
+    font-weight:600;
+    transition:.25s;
 }
 
-.portal-btn:hover{
-    background:#255640;
+.btn:hover{background:#244f3c}
+
+/* ===== QR SECTION ===== */
+.qr-section{
+    background:linear-gradient(135deg,#2f6b4f,#1f4030);
+    color:#fff;
+    padding:70px 8vw;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:40px;
+    align-items:center;
+}
+
+.qr-section h2{
+    font-size:1.8rem;
+    margin-bottom:10px;
+}
+
+.qr-box{
+    background:#fff;
+    color:#333;
+    padding:25px;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+}
+
+.qr-placeholder{
+    width:180px;
+    height:180px;
+    margin:15px auto;
+    background:repeating-linear-gradient(45deg,#ddd,#ddd 10px,#bbb 10px,#bbb 20px);
+    border-radius:10px;
 }
 
 /* ===== FOOTER ===== */
@@ -131,7 +170,7 @@ footer{
     background:#e9eeec;
     text-align:center;
     padding:25px 15px;
-    font-size:0.85rem;
+    font-size:.85rem;
     color:#555;
 }
 </style>
@@ -139,43 +178,61 @@ footer{
 
 <body>
 
-<header>
-    <h1>Setor de Paisagismo</h1>
-    <p>
-        Sistema de identificação ambiental via QR Code para acesso a informações,
-        história e características dos elementos naturais e monumentos da área.
-    </p>
-</header>
+<section class="hero">
+    <div class="hero-content">
+        <h1>Conheça, aprenda e preserve.</h1>
+        <p>
+            Este portal conecta visitantes à história, às espécies e aos monumentos
+            do nosso espaço através de tecnologia e educação ambiental.
+        </p>
+    </div>
+</section>
 
-<section class="features">
-    <div class="feature">📱 Acesso rápido por QR Code</div>
-    <div class="feature">🌿 Informações botânicas</div>
-    <div class="feature">🗺️ Localização dos pontos</div>
-    <div class="feature">♿ Conteúdo acessível</div>
-    <div class="feature">📷 Galeria de imagens</div>
-    <div class="feature">📊 Registro de visitas</div>
+<section class="mission">
+    <h2>🌿 Nossa Missão</h2>
+    <p>
+        Utilizar QR Codes e conteúdo digital para transformar áreas verdes em espaços
+        educativos, promovendo consciência ambiental, valorização cultural e acesso
+        à informação de forma simples e moderna.
+    </p>
 </section>
 
 <main class="portal">
 
-    <div class="portal-card">
+    <div class="card">
         <div class="icon">🌳</div>
-        <h2>Ipê Amarelo</h2>
-        <p>Dados botânicos, curiosidades e importância ambiental da espécie.</p>
-        <a href="ipe-amarelo.html" class="portal-btn">Acessar informações</a>
+        <h3>Ipê Amarelo</h3>
+        <p>Informações botânicas, curiosidades e registros da espécie.</p>
+        <a class="btn" href="ipe-amarelo.html">Explorar</a>
     </div>
 
-    <div class="portal-card">
+    <div class="card">
         <div class="icon">🪨</div>
-        <h2>Monumento de Pedra</h2>
-        <p>História, significado e registros fotográficos do monumento.</p>
-        <a href="monumento.html" class="portal-btn">Acessar informações</a>
+        <h3>Monumento de Pedra</h3>
+        <p>História, significado cultural e galeria de imagens.</p>
+        <a class="btn" href="monumento.html">Explorar</a>
     </div>
 
 </main>
 
+<section class="qr-section">
+    <div>
+        <h2>📱 Aponte a câmera</h2>
+        <p>
+            Cada ponto da praça possui um QR Code.  
+            Escaneie e descubra informações exclusivas diretamente no seu celular.
+        </p>
+    </div>
+
+    <div class="qr-box">
+        <strong>Exemplo de QR Code</strong>
+        <div class="qr-placeholder"></div>
+        <small>Escaneie para acessar uma página informativa</small>
+    </div>
+</section>
+
 <footer>
-    © 2026 • Setor de Paisagismo • Desenvolvido por Tiago Santos do Carmo
+    © 2026 • Projeto Ambiental — Setor de Paisagismo • Desenvolvido por Tiago Santos do Carmo
 </footer>
 
 </body>
