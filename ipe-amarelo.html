@@ -2,241 +2,36 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>🌳 Ipê Amarelo • Paisagismo</title>
-
+<title>Ipê Amarelo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Ipê Amarelo • Espécie nativa brasileira de grande importância ambiental e paisagística.">
-<meta name="theme-color" content="#eaf7ef">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',system-ui,sans-serif}
-
-body{
-    background:
-        radial-gradient(circle at top,#f4fff8,#e8f6ef 60%,#dff1ea);
-    color:#204030;
-    min-height:100vh;
-}
-
-/* ===== HERO ===== */
-.hero{
-    text-align:center;
-    padding:clamp(70px,9vw,120px) 18px 60px;
-    background:
-        linear-gradient(to bottom,rgba(255,255,255,.9),rgba(255,255,255,.6)),
-        url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1600")
-        center/cover no-repeat;
-}
-
-.hero h1{
-    font-size:clamp(2.4rem,5vw,3.4rem);
-    letter-spacing:.12em;
-    color:#1f6b4f;
-}
-
-.hero p{
-    margin:16px auto;
-    max-width:720px;
-    font-size:1.05rem;
-    opacity:.9;
-}
-
-.btn-voltar{
-    display:inline-block;
-    margin-top:26px;
-    padding:14px 36px;
-    border-radius:40px;
-    background:linear-gradient(135deg,#6ee7b7,#34d399);
-    color:#064e3b;
-    text-decoration:none;
-    font-weight:600;
-    transition:.25s ease;
-}
-.btn-voltar:hover{
-    transform:translateY(-3px) scale(1.05);
-    box-shadow:0 12px 30px rgba(0,0,0,.15);
-}
-
-/* ===== CONTAINER ===== */
-.container{
-    max-width:1100px;
-    margin:auto;
-    padding:60px 18px 90px;
-    display:grid;
-    gap:42px;
-}
-
-/* ===== CARD ===== */
-.card{
-    background:rgba(255,255,255,.75);
-    border-radius:24px;
-    padding:clamp(26px,4vw,38px);
-    box-shadow:0 12px 35px rgba(0,0,0,.08);
-    opacity:0;
-    transform:translateY(40px);
-    transition:.7s cubic-bezier(.2,.8,.2,1);
-}
-.card.show{
-    opacity:1;
-    transform:none;
-}
-
-.card h2{
-    color:#1f6b4f;
-    margin-bottom:18px;
-    font-weight:700;
-}
-
-.card p{
-    line-height:1.8;
-    margin-bottom:6px;
-}
-
-/* ===== GALERIA ===== */
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:18px;
-}
-.gallery img{
-    width:100%;
-    border-radius:16px;
-    cursor:pointer;
-    transition:.35s ease;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
-}
-.gallery img:hover{
-    transform:translateY(-6px) scale(1.05);
-}
-
-/* ===== VIDEO ===== */
-.video-box{
-    position:relative;
-    padding-top:56.25%;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 15px 40px rgba(0,0,0,.18);
-}
-.video-box video{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-}
-
-/* ===== LIGHTBOX ===== */
-#lightbox{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.85);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    opacity:0;
-    pointer-events:none;
-    transition:.3s;
-    z-index:9999;
-}
-#lightbox.show{
-    opacity:1;
-    pointer-events:all;
-}
-#lightbox img{
-    max-width:92%;
-    max-height:92%;
-    border-radius:16px;
-    animation:zoom .25s ease;
-}
-@keyframes zoom{
-    from{transform:scale(.9);opacity:0}
-    to{transform:scale(1);opacity:1}
-}
-
-/* ===== FOOTER ===== */
-footer{
-    text-align:center;
-    padding:26px;
-    font-size:.85rem;
-    opacity:.7;
-}
+body{margin:0;font-family:Arial;background:#071b12;color:#eafff1}
+header{text-align:center;padding:60px 20px}
+section{padding:20px;max-width:900px;margin:auto}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.gallery img{width:100%;border-radius:14px}
+a{color:#7cffb2;text-decoration:none}
 </style>
 </head>
-
 <body>
 
-<header class="hero">
-    <h1>🌳 Ipê Amarelo</h1>
-    <p>Espécie nativa brasileira de grande importância ambiental e paisagística.</p>
-    <a href="./index.html" class="btn-voltar">⬅ Voltar ao Portal</a>
+<header>
+<h1>🌳 Ipê Amarelo</h1>
+<p>Árvore símbolo do Brasil, famosa por sua floração intensa.</p>
+<a href="index.html">⬅ Voltar</a>
 </header>
 
-<main class="container">
-
-<section class="card">
-    <h2>🌱 Informações</h2>
-    <p><b>Nome científico:</b> Handroanthus albus</p>
-    <p><b>Altura média:</b> 10–15 metros</p>
-    <p><b>Origem:</b> Brasil</p>
-    <p><b>Floração:</b> Inverno</p>
-    <p><b>Importância:</b> Arborização urbana e preservação ambiental.</p>
+<section>
+<p><b>Nome científico:</b> Handroanthus albus</p>
+<p><b>Altura:</b> até 15m</p>
+<p><b>Floração:</b> inverno</p>
 </section>
 
-<section class="card">
-    <h2>🖼️ Galeria</h2>
-    <div class="gallery">
-        <img src="./assets/fotos/ipe1.jpg" alt="Ipê Amarelo 1">
-        <img src="./assets/fotos/ipe2.jpg" alt="Ipê Amarelo 2">
-        <img src="./assets/fotos/ipe3.jpg" alt="Ipê Amarelo 3">
-    </div>
+<section class="gallery">
+<img src="assets/img/ipe1.jpg">
+<img src="assets/img/ipe2.jpg">
+<img src="assets/img/ipe3.jpg">
 </section>
-
-<section class="card">
-    <h2>🎥 Vídeo</h2>
-    <div class="video-box">
-        <video controls preload="metadata">
-            <source src="./assets/videos/ipe.mp4" type="video/mp4">
-        </video>
-    </div>
-</section>
-
-</main>
-
-<footer>
-© 2026 • Tiago Santos do Carmo • Setor de Paisagismo
-</footer>
-
-<div id="lightbox"><img id="lightbox-img"></div>
-
-<script>
-/* LIGHTBOX */
-const imgs=document.querySelectorAll(".gallery img");
-const lb=document.getElementById("lightbox");
-const lbImg=document.getElementById("lightbox-img");
-
-imgs.forEach(i=>{
-  i.onclick=()=>{
-    lbImg.src=i.src;
-    lb.classList.add("show");
-  }
-});
-lb.onclick=()=>lb.classList.remove("show");
-
-/* ANIMAÇÃO DOS CARDS */
-const cards=document.querySelectorAll(".card");
-const obs=new IntersectionObserver(e=>{
-  e.forEach(x=>{
-    if(x.isIntersecting){
-      x.target.classList.add("show");
-      obs.unobserve(x.target);
-    }
-  });
-},{threshold:.15});
-cards.forEach(c=>obs.observe(c));
-</script>
 
 </body>
 </html>
