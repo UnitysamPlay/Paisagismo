@@ -127,12 +127,7 @@ body{background:#071b12;color:#eafff1}
 
 <div class="chatbox" id="chatbox">
   <div class="chat-header">🌿 Auria — Assistente Ambiental</div>
-  <div class="chat-messages" id="messages">
-    <div class="msg bot">
-      Olá! Eu sou a Auria 🌱, criada por Tiago Santos do Carmo.<br>
-      Pergunte sobre árvores, jardins, praça ou monumento.
-    </div>
-  </div>
+  <div class="chat-messages" id="messages"></div>
   <div class="chat-input">
     <input id="userInput" placeholder="Digite sua pergunta...">
     <button onclick="sendMsg()">Enviar</button>
@@ -140,11 +135,24 @@ body{background:#071b12;color:#eafff1}
 </div>
 
 <script>
+let chatOpened = false;
+let lastWasGreeting = false;
+
 function toggleChat(){
   const c=document.getElementById("chatbox");
   const i=document.getElementById("userInput");
-  c.style.display = c.style.display==="flex" ? "none" : "flex";
-  setTimeout(()=>i.focus(),200);
+
+  const opening = c.style.display !== "flex";
+  c.style.display = opening ? "flex" : "none";
+
+  if(opening && !chatOpened){
+    chatOpened = true;
+    setTimeout(()=>{
+      addMsg("Olá! Eu sou a Auria 🌱, criada por Tiago Santos do Carmo.", "bot");
+      addMsg("Pergunte sobre árvores, jardins, praça, monumentos ou meio ambiente 😊", "bot");
+      i.focus();
+    },300);
+  }
 }
 
 function addMsg(text,cls){
@@ -164,130 +172,107 @@ function normalize(t){
     .trim();
 }
 
-/* ===== AURIA v11 — MAIS NATURAL E MENOS ROBÔ ===== */
+/* ===== AURIA MVP ===== */
 function botReply(q){
 
   if(!q || !q.trim())
-    return "Pode mandar a pergunta 🌿 Posso falar de árvores, jardins, meio ambiente, praça ou monumentos.";
+    return "Pode mandar a pergunta 🌿";
 
   q = normalize(q);
 
-  /* ================= CUMPRIMENTOS ================= */
+  /* CUMPRIMENTOS */
   if(/\b(oi+|ola+|eai+|opa|salve)\b/.test(q)){
+    if(lastWasGreeting){
+      lastWasGreeting=false;
+      return "Hehe 😅 manda a pergunta aí! Posso falar de árvores, jardins, praça ou monumentos.";
+    }
+    lastWasGreeting=true;
     const r=[
-      "Oi! 😄 Em que posso te ajudar hoje?",
-      "Olá! 🌿 Quer saber algo sobre a praça ou as árvores?",
+      "Oi! 😄 Em que posso te ajudar?",
+      "Olá! 🌿 Quer saber algo sobre a praça?",
       "E aí! Bora falar de natureza? 🌱",
-      "Oi! Posso te contar curiosidades ambientais se quiser 👀🌳"
+      "Oi! Posso te contar curiosidades ambientais 👀🌳"
     ];
     return r[Math.floor(Math.random()*r.length)];
   }
+  lastWasGreeting=false;
 
-  if(/\b(bom dia)\b/.test(q)) return "Bom dia! ☀️ Que tal aprender algo novo sobre as árvores da praça?";
-  if(/\b(boa tarde)\b/.test(q)) return "Boa tarde! 🌿 Posso te ajudar com informações ambientais.";
-  if(/\b(boa noite)\b/.test(q)) return "Boa noite! 🌙 A natureza também trabalha enquanto a gente descansa 😄";
+  if(q.includes("bom dia")) return "Bom dia! ☀️ Que tal aprender algo sobre as árvores da praça?";
+  if(q.includes("boa tarde")) return "Boa tarde! 🌿 Posso te ajudar com algo ambiental.";
+  if(q.includes("boa noite")) return "Boa noite! 🌙 A natureza nunca dorme 😄";
 
-  if(/\b(tudo bem|como vai|beleza|tranquilo)\b/.test(q))
-    return "Tudo ótimo 🌱 pronta pra te ajudar! O que você quer saber?";
+  if(q.includes("tudo bem") || q.includes("beleza"))
+    return "Tudo ótimo 🌱 pronta pra ajudar!";
 
-  /* ================= DESPEDIDA ================= */
-  if(/\b(tchau|ate logo|ate mais|flw|falou)\b/.test(q))
-    return "Até mais! 🌿 Volta sempre pra aprender mais sobre a natureza.";
+  /* IDENTIDADE */
+  if(q.includes("quem e voce") || q.includes("auria"))
+    return "Sou a Auria 🌿, uma assistente ambiental criada para este portal educativo.";
 
-  /* ================= IDENTIDADE ================= */
-  if(q.includes("quem e voce") || q.includes("o que voce e") || q.includes("auria"))
-    return "Sou a Auria 🌿, uma assistente ambiental criada para ensinar sobre natureza, praças e sustentabilidade.";
+  if(q.includes("criador") || q.includes("tiago"))
+    return "Fui criada por Tiago Santos do Carmo como parte de um projeto educacional.";
 
-  if(q.includes("criador") || q.includes("quem criou") || q.includes("tiago"))
-    return "Fui criada por Tiago Santos do Carmo como parte de um projeto educacional com QR Codes e site.";
-
-  if(q.includes("projeto"))
-    return "Este projeto usa QR Codes na praça que levam para páginas educativas e para mim, a Auria 🌱";
-
-  /* ================= PRAÇA ================= */
+  /* PRAÇA */
   if(q.includes("praca") || q.includes("parque"))
-    return "A praça é um espaço para lazer, convivência e educação ambiental. Árvores ajudam a reduzir o calor e melhorar o ar.";
+    return "A praça é um espaço de lazer, convivência e educação ambiental.";
 
-  if(q.includes("banco") || q.includes("sentar") || q.includes("descanso"))
-    return "Bancos perto de árvores são melhores porque têm sombra e ficam mais frescos.";
+  if(q.includes("lixo"))
+    return "Manter a praça limpa protege animais e evita doenças.";
 
-  if(q.includes("lixo") || q.includes("sujeira"))
-    return "Manter a praça limpa protege os animais e evita doenças.";
-
-  /* ================= ÁRVORES ================= */
-  if(q.includes("por que plantar") || q.includes("importancia das arvores"))
-    return "Árvores produzem oxigênio, reduzem o calor, ajudam na chuva e servem de abrigo para animais.";
+  /* ÁRVORES */
+  if(q.includes("por que plantar"))
+    return "Árvores produzem oxigênio, reduzem calor e ajudam no clima.";
 
   if(q.includes("raiz"))
-    return "As raízes seguram o solo e evitam erosão e deslizamentos.";
+    return "As raízes evitam erosão e ajudam a segurar o solo.";
 
   if(q.includes("sombra"))
-    return "Áreas com árvores podem ser até 10°C mais frescas do que áreas sem vegetação.";
+    return "Áreas arborizadas podem ser até 10°C mais frescas.";
 
   if(q.includes("ipe"))
-    return "O Ipê Amarelo é nativo do Brasil e floresce no inverno quando perde as folhas.";
+    return "O Ipê Amarelo é nativo do Brasil e floresce no inverno.";
 
   if(q.includes("arvore"))
-    return "As árvores são essenciais para o clima, para a água e para a vida nas cidades.";
+    return "As árvores são essenciais para o equilíbrio ambiental.";
 
-  /* ================= JARDINS ================= */
-  if(q.includes("jardim japones") || q.includes("jardim oriental"))
-    return "O jardim japonês busca equilíbrio e tranquilidade usando pedras, água e plantas bem posicionadas.";
+  /* JARDINS */
+  if(q.includes("jardim japones") || q.includes("oriental"))
+    return "O jardim japonês busca equilíbrio usando pedras, água e plantas.";
 
   if(q.includes("zen"))
-    return "O jardim zen representa paisagens naturais com areia e pedras, ideal para meditação.";
+    return "O jardim zen usa areia e pedras para representar a natureza.";
 
   if(q.includes("bonsai"))
-    return "Bonsai é a arte de cultivar árvores em miniatura mantendo a forma natural da planta.";
+    return "Bonsai é a arte de cultivar árvores em miniatura.";
 
-  if(q.includes("jardim europeu") || q.includes("jardim classico"))
-    return "O jardim europeu é organizado e simétrico, com caminhos retos e canteiros geométricos.";
+  if(q.includes("jardim europeu"))
+    return "O jardim europeu é simétrico e organizado.";
 
-  if(q.includes("topiaria"))
-    return "Topiaria é a poda artística que cria formas decorativas em plantas.";
-
-  /* ================= MEIO AMBIENTE ================= */
+  /* MEIO AMBIENTE */
   if(q.includes("meio ambiente") || q.includes("natureza"))
-    return "Cuidar do meio ambiente é proteger a água, o ar, o solo e os seres vivos.";
+    return "Cuidar do meio ambiente é cuidar da nossa própria vida.";
 
-  if(q.includes("agua"))
-    return "Economizar água evita desperdício e garante água para o futuro.";
+  if(q.includes("reciclagem"))
+    return "Reciclar reduz lixo e economiza recursos naturais.";
 
-  if(q.includes("reciclagem") || q.includes("reciclar"))
-    return "Reciclar reduz o lixo e economiza recursos naturais.";
+  if(q.includes("clima"))
+    return "Plantar árvores ajuda a reduzir o aquecimento global.";
 
-  if(q.includes("clima") || q.includes("aquecimento"))
-    return "Plantar árvores ajuda a reduzir os impactos das mudanças climáticas.";
-
-  if(q.includes("poluicao"))
-    return "A poluição prejudica a saúde das pessoas e dos animais.";
-
-  /* ================= MONUMENTOS ================= */
+  /* MONUMENTOS */
   if(q.includes("monumento") || q.includes("estatua"))
-    return "Monumentos preservam a memória histórica e cultural da comunidade.";
+    return "Monumentos preservam a história da comunidade.";
 
   if(q.includes("historia"))
-    return "Conhecer a história do lugar ajuda a valorizar a cultura local.";
+    return "Conhecer a história ajuda a valorizar a cultura local.";
 
-  /* ================= EDUCAÇÃO ================= */
-  if(q.includes("qr"))
-    return "Os QR Codes permitem acessar informações educativas direto pelo celular.";
+  /* AJUDA */
+  if(q.includes("ajuda"))
+    return "Pergunte sobre árvores, jardins, praça, monumentos ou meio ambiente 🌿";
 
-  if(q.includes("escola") || q.includes("estudante"))
-    return "Projetos ambientais ajudam estudantes a aprender na prática sobre sustentabilidade.";
+  if(q.includes("obrigado") || q.includes("valeu"))
+    return "De nada! 🌱 Sempre que precisar, estou por aqui.";
 
-  /* ================= AJUDA ================= */
-  if(q.includes("ajuda") || q.includes("o que posso perguntar"))
-    return "Você pode perguntar sobre árvores, jardins, meio ambiente, praça e monumentos.";
-
-  if(q.includes("obrigado") || q.includes("valeu") || q.includes("thanks"))
-    return "De nada! 🌿 Fico feliz em ajudar.";
-
-  /* ================= FALLBACK ================= */
-  return "Hmm 🤔 não entendi direitinho, mas posso falar sobre árvores, jardins, meio ambiente, praça e monumentos. Tenta perguntar de outro jeito.";
+  return "Não entendi direitinho 🤔 mas posso falar de árvores, jardins, praça e monumentos.";
 }
-
-
 
 function sendMsg(){
   const input=document.getElementById("userInput");
@@ -302,9 +287,11 @@ function sendMsg(){
   box.appendChild(typing);
   box.scrollTop=box.scrollHeight;
 
+  const q=input.value;
+
   setTimeout(()=>{
     typing.remove();
-    addMsg(botReply(input.value),"bot");
+    addMsg(botReply(q),"bot");
   },500);
 
   input.value="";
