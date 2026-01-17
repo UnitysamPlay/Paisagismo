@@ -130,9 +130,9 @@ body{background:#071b12;color:#eafff1}
 
 <!-- CHATBOX -->
 <div class="chatbox" id="chatbox">
-  <div class="chat-header">Assistente Ambiental 🌿</div>
+  <div class="chat-header">Assistente Ambiental Aur-ia </div>
   <div class="chat-messages" id="messages">
-    <div class="msg bot">Olá! Pergunte sobre a praça, árvores ou monumentos.</div>
+    <div class="msg bot">Olá!Eu sou a Auria e ainda estou em treinamento Pergunte sobre a praça, árvores ou monumentos.</div>
   </div>
   <div class="chat-input">
     <input id="userInput" placeholder="Digite sua pergunta...">
@@ -154,17 +154,42 @@ function addMsg(text,cls){
   document.getElementById("messages").scrollTop=9999;
 }
 
-/* === MVP "TREINADO" COM REGRAS === */
+/* === MVP "TREINADO" COM REGRAS — AURIA v1 === */
 function botReply(q){
-  q=q.toLowerCase();
 
-  if(q.includes("ipê")) return "O Ipê Amarelo é nativo do Brasil e floresce no inverno.";
-  if(q.includes("monumento")) return "O monumento representa a história e identidade da comunidade.";
-  if(q.includes("qr")) return "Os QR Codes levam direto às páginas educativas do portal.";
-  if(q.includes("praça")) return "A praça é um espaço de lazer, cultura e preservação ambiental.";
-  if(q.includes("árvore")) return "As árvores ajudam no clima, na sombra e na qualidade do ar.";
+  if(!q) return "Pode escrever sua pergunta 😊";
 
-  return "Ainda estou aprendendo 😊. Tente perguntar sobre árvores, praça ou monumento.";
+  q = q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+  // ---- IDENTIDADE DA AURIA ----
+  if(q.includes("auria") || q.includes("quem e voce") || q.includes("quem é você"))
+    return "Eu sou a Auria 🌿, assistente ambiental criada por Tiago Santos do Carmo. Ainda estou em treinamento, mas evoluindo rápido 😉";
+
+  if(q.includes("criador") || q.includes("quem te criou") || q.includes("tiago"))
+    return "Fui desenvolvida por Tiago Santos do Carmo como parte do Portal Ambiental 🌱";
+
+  // ---- IPÊ AMARELO ----
+  if(q.includes("ipe") || q.includes("ipe amarelo"))
+    return "O Ipê Amarelo é uma árvore nativa do Brasil, famosa pela floração intensa no inverno e muito usada no paisagismo urbano.";
+
+  // ---- MONUMENTO ----
+  if(q.includes("monumento") || q.includes("pedra"))
+    return "O monumento simboliza a história e a identidade cultural da comunidade, sendo um ponto de referência da praça.";
+
+  // ---- QR CODE ----
+  if(q.includes("qr") || q.includes("qrcode") || q.includes("codigo"))
+    return "Os QR Codes permitem acessar informações educativas direto pelo celular, sem precisar instalar aplicativos.";
+
+  // ---- PRAÇA ----
+  if(q.includes("praca") || q.includes("parque"))
+    return "A praça é um espaço público de convivência, lazer e educação ambiental para a comunidade.";
+
+  // ---- ÁRVORES / MEIO AMBIENTE ----
+  if(q.includes("arvore") || q.includes("arvores") || q.includes("meio ambiente"))
+    return "As árvores ajudam a reduzir o calor, melhoram o ar e trazem mais vida para a cidade 🌳";
+
+  // ---- RESPOSTA PADRÃO ----
+  return "Ainda estou em treinamento 🤖🌱. Tenta perguntar sobre Ipê, monumento, praça ou QR Code!";
 }
 
 function sendMsg(){
