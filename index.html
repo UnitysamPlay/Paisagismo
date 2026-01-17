@@ -154,42 +154,120 @@ function addMsg(text,cls){
   document.getElementById("messages").scrollTop=9999;
 }
 
-/* === MVP "TREINADO" COM REGRAS — AURIA v1 === */
+/* =====================================================
+   AURIA v3 — GUIA AMBIENTAL | PAISAGISMO COMPLETO
+   Criada por Tiago Santos do Carmo — MVP Educacional
+===================================================== */
+
 function botReply(q){
 
-  if(!q) return "Pode escrever sua pergunta 😊";
+  if(!q) return "Pode perguntar 🌿 Posso falar sobre jardins, árvores, monumento, praça e meio ambiente.";
 
   q = q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-  // ---- IDENTIDADE DA AURIA ----
-  if(q.includes("auria") || q.includes("quem e voce") || q.includes("quem é você"))
-    return "Eu sou a Auria 🌿, assistente ambiental criada por Tiago Santos do Carmo. Ainda estou em treinamento, mas evoluindo rápido 😉";
+  /* ================= IDENTIDADE ================= */
+
+  if(q.includes("auria") || q.includes("quem e voce") || q.includes("quem é voce"))
+    return "Sou a Auria 🌱, assistente do Portal Ambiental, criada por Tiago Santos do Carmo e em treinamento contínuo.";
 
   if(q.includes("criador") || q.includes("quem te criou") || q.includes("tiago"))
-    return "Fui desenvolvida por Tiago Santos do Carmo como parte do Portal Ambiental 🌱";
+    return "Fui desenvolvida por Tiago Santos do Carmo como parte de um projeto educativo de paisagismo e cidadania.";
 
-  // ---- IPÊ AMARELO ----
-  if(q.includes("ipe") || q.includes("ipe amarelo"))
-    return "O Ipê Amarelo é uma árvore nativa do Brasil, famosa pela floração intensa no inverno e muito usada no paisagismo urbano.";
+  if(q.includes("projeto"))
+    return "Este projeto usa QR Codes, site interativo e a Auria para educação ambiental em espaços públicos.";
 
-  // ---- MONUMENTO ----
-  if(q.includes("monumento") || q.includes("pedra"))
-    return "O monumento simboliza a história e a identidade cultural da comunidade, sendo um ponto de referência da praça.";
+  /* ================= PAISAGISMO ORIENTAL ================= */
 
-  // ---- QR CODE ----
-  if(q.includes("qr") || q.includes("qrcode") || q.includes("codigo"))
-    return "Os QR Codes permitem acessar informações educativas direto pelo celular, sem precisar instalar aplicativos.";
+  if(q.includes("jardim japones") || q.includes("japones") || q.includes("oriental"))
+    return "O paisagismo oriental busca harmonia com a natureza, usando pedras, água, musgos, árvores podadas e caminhos curvos.";
 
-  // ---- PRAÇA ----
-  if(q.includes("praca") || q.includes("parque"))
-    return "A praça é um espaço público de convivência, lazer e educação ambiental para a comunidade.";
+  if(q.includes("zen"))
+    return "O jardim zen usa areia, pedras e poucos elementos para meditação e equilíbrio mental.";
 
-  // ---- ÁRVORES / MEIO AMBIENTE ----
-  if(q.includes("arvore") || q.includes("arvores") || q.includes("meio ambiente"))
-    return "As árvores ajudam a reduzir o calor, melhoram o ar e trazem mais vida para a cidade 🌳";
+  if(q.includes("bonsai"))
+    return "Bonsai é a arte de cultivar árvores em miniatura, mantendo forma e proporção naturais.";
 
-  // ---- RESPOSTA PADRÃO ----
-  return "Ainda estou em treinamento 🤖🌱. Tenta perguntar sobre Ipê, monumento, praça ou QR Code!";
+  if(q.includes("lanterna") || q.includes("torii"))
+    return "Elementos como lanternas de pedra e portais simbolizam iluminação e transição espiritual nos jardins orientais.";
+
+  if(q.includes("cerejeira") || q.includes("sakura"))
+    return "A cerejeira simboliza a beleza passageira da vida e é muito usada em jardins japoneses.";
+
+  /* ================= PAISAGISMO OCIDENTAL ================= */
+
+  if(q.includes("jardim europeu") || q.includes("europeu") || q.includes("classico") || q.includes("formal"))
+    return "O paisagismo europeu é simétrico, com canteiros geométricos, gramados amplos e caminhos retos.";
+
+  if(q.includes("roseira") || q.includes("rosas"))
+    return "Rosas são comuns em jardins clássicos e simbolizam beleza e cuidado no paisagismo.";
+
+  if(q.includes("topiaria"))
+    return "Topiaria é a técnica de podar plantas em formas geométricas ou artísticas.";
+
+  if(q.includes("canteiros"))
+    return "Canteiros organizam as espécies e facilitam manutenção e irrigação.";
+
+  /* ================= PAISAGISMO URBANO ================= */
+
+  if(q.includes("praca") || q.includes("urbano"))
+    return "O paisagismo urbano melhora conforto térmico, valoriza o espaço e promove convivência social.";
+
+  if(q.includes("sombra"))
+    return "Árvores de sombra reduzem a temperatura e protegem contra o sol.";
+
+  if(q.includes("acessibilidade"))
+    return "Caminhos devem ser acessíveis, com rampas e pisos regulares para todos.";
+
+  if(q.includes("bancos") || q.includes("descanso"))
+    return "Áreas de descanso devem ficar próximas a árvores e locais tranquilos.";
+
+  if(q.includes("iluminacao"))
+    return "Iluminação valoriza o paisagismo e aumenta a segurança à noite.";
+
+  /* ================= ARBORIZAÇÃO ================= */
+
+  if(q.includes("arvore"))
+    return "Árvores ajudam no clima, na biodiversidade, na sombra e na qualidade do ar.";
+
+  if(q.includes("nativa"))
+    return "Plantas nativas são mais resistentes e preservam a fauna local.";
+
+  if(q.includes("floracao"))
+    return "A floração atrai polinizadores e embeleza o ambiente urbano.";
+
+  if(q.includes("poda"))
+    return "Podas devem ser feitas de forma correta para não prejudicar a planta.";
+
+  /* ================= MEIO AMBIENTE ================= */
+
+  if(q.includes("meio ambiente") || q.includes("sustentavel"))
+    return "Paisagismo sustentável usa espécies adequadas e reduz consumo de água.";
+
+  if(q.includes("agua"))
+    return "Uso consciente da água é essencial em projetos ambientais.";
+
+  if(q.includes("reciclagem"))
+    return "Reciclagem reduz impacto ambiental e ajuda a preservar recursos naturais.";
+
+  /* ================= EDUCAÇÃO / QR ================= */
+
+  if(q.includes("qr") || q.includes("qrcode"))
+    return "Os QR Codes conectam visitantes a informações educativas direto no celular.";
+
+  if(q.includes("educacao"))
+    return "Educação ambiental ajuda a criar consciência ecológica na comunidade.";
+
+  /* ================= ITENS DA PRAÇA ================= */
+
+  if(q.includes("ipe"))
+    return "O Ipê Amarelo é uma árvore nativa do Brasil, famosa pela floração intensa no inverno.";
+
+  if(q.includes("monumento"))
+    return "O monumento é um marco cultural e histórico da praça.";
+
+  /* ================= DEFAULT ================= */
+
+  return "Ainda estou em treinamento 🌱. Pergunte sobre jardins japoneses, paisagismo europeu, árvores, praça ou meio ambiente.";
 }
 
 function sendMsg(){
