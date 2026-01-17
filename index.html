@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>🌿 Portal Ambiental</title>
+<title> Portal Ambiental Paisagismo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0b2b16">
 
@@ -11,15 +11,16 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
 body{background:#071b12;color:#eafff1}
-
 /* HERO */
 .hero{
   min-height:90vh;
   background:
     linear-gradient(to bottom,rgba(0,0,0,.45),#071b12),
-    url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1800") center/cover;
-  display:flex;align-items:center;
+    url("img/praca.jpg") center/cover;
+  display:flex;
+  align-items:center;
 }
+
 .hero-content{padding:80px 8vw;max-width:760px}
 .hero h1{letter-spacing:.22em;color:#8dffd1;font-size:2.2rem}
 .hero p{opacity:.9;margin-top:14px;line-height:1.6}
@@ -126,7 +127,7 @@ body{background:#071b12;color:#eafff1}
 <button class="chatbot-btn" onclick="toggleChat()">💬</button>
 
 <div class="chatbox" id="chatbox">
-  <div class="chat-header">🌿 Auria — Assistente Ambiental</div>
+  <div class="chat-header"> Auria — Assistente Ambiental</div>
   <div class="chat-messages" id="messages"></div>
   <div class="chat-input">
     <input id="userInput" placeholder="Digite sua pergunta...">
@@ -177,7 +178,7 @@ function normalize(t){
 function botReply(q){
 
   if(!q || !q.trim())
-    return "Pode mandar a pergunta 🌿 Posso falar de árvores, jardins, meio ambiente, praça ou monumentos.";
+    return "Pode mandar a pergunta  Posso falar de árvores, jardins, meio ambiente, praça ou monumentos.";
 
   q = normalize(q);
   q = q.replace("jardin","jardim").replace("jardims","jardins");
@@ -198,7 +199,7 @@ function botReply(q){
     if(lastTopic==="meioambiente")
       return "Separar lixo, economizar água e respeitar áreas verdes já faz muita diferença.";
 
-    return "Sobre qual assunto você quer saber mais? 🌿";
+    return "Sobre qual assunto você quer saber mais? ";
   }
 
   /* ================= CONFIRMAÇÕES ================= */
@@ -220,7 +221,7 @@ function botReply(q){
 
   /* ================= IDENTIDADE ================= */
   if(q.includes("auria") || q.includes("quem e voce"))
-    return "Sou a Auria 🌿, assistente ambiental do portal, criada para ajudar com educação ambiental.";
+    return "Sou a Auria , assistente ambiental do portal, criada para ajudar com educação ambiental.";
 
   if(q.includes("tiago") || q.includes("criador") || q.includes("quem criou"))
     return "Fui criada por Tiago Santos do Carmo como parte de um projeto educacional.";
@@ -295,7 +296,7 @@ function botReply(q){
     lastTopic="jardins";
     r=[
       "Existem jardins japonês, europeu, tropical… qual você quer conhecer?",
-      "Jardins ajudam no bem-estar e deixam os espaços mais agradáveis 🌿",
+      "Jardins ajudam no bem-estar e deixam os espaços mais agradáveis ",
       "Quer saber como um jardim é planejado?"
     ];
     return r[Math.floor(Math.random()*r.length)];
