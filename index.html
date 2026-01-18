@@ -191,6 +191,8 @@ function normalize(t){
     .trim();
 }
 
+let lastTopic = null;
+
 /* ===== AURIA — MOTOR MVP TURBINADO ===== */
 function botReply(q){
 
@@ -198,90 +200,178 @@ function botReply(q){
     return "Pode mandar a pergunta 😄 Posso falar de árvores, jardins, meio ambiente, praça ou monumentos.";
 
   q = normalize(q);
-  q = q.replace("jardin","jardim").replace("jardims","jardins");
+
+  // Correções comuns de digitação
+  q = q
+    .replace("jardin","jardim")
+    .replace("jardims","jardins")
+    .replace("arvores","arvore")
+    .replace("monumeto","monumento");
 
   let r;
 
-  if(/\b(me fala mais|mais disso|continua|detalha|explica mais)\b/.test(q)){
-    if(lastTopic==="jardins") return "Jardins também ajudam a reduzir o calor e melhorar a qualidade do ar.";
-    if(lastTopic==="arvores") return "Árvores também reduzem ruído e atraem pássaros.";
-    if(lastTopic==="monumentos") return "Eles também fortalecem a identidade cultural da comunidade.";
-    if(lastTopic==="meioambiente") return "Separar lixo e economizar água já ajuda muito.";
-    return "Sobre qual assunto quer continuar? 🌿";
+  /* ===== CONFIRMAÇÕES SIM / NÃO ===== */
+  if(/\b(sim|claro|ok|pode|manda)\b/.test(q)){
+    if(lastTopic==="jardins") return "Show 😄 Quer saber sobre jardim japonês, europeu ou tropical?";
+    if(lastTopic==="arvores") return "Boa 🌳 Quer saber sobre espécies, benefícios ou plantio?";
+    if(lastTopic==="monumentos") return "Beleza! Posso falar da história ou da importância cultural.";
+    if(lastTopic==="meioambiente") return "Perfeito 🌍 Posso falar de reciclagem, água ou clima.";
+    return "Legal! Sobre o que quer conversar: árvores, jardins, praça ou monumentos? 🌿";
   }
 
+  if(/\b(nao|não|depois|agora nao)\b/.test(q)){
+    return "Tranquilo 😄 quando quiser é só perguntar! Posso falar de natureza, jardins ou da praça 🌱";
+  }
+
+  /* ===== CONTINUIDADE ===== */
+  if(/\b(me fala mais|mais disso|continua|detalha|explica mais)\b/.test(q)){
+    if(lastTopic==="jardins")
+      return "Além de beleza, jardins ajudam no conforto térmico e bem-estar das pessoas.";
+    if(lastTopic==="arvores")
+      return "Árvores também reduzem enchentes e melhoram a qualidade do solo.";
+    if(lastTopic==="monumentos")
+      return "Eles também servem como pontos turísticos e educativos.";
+    if(lastTopic==="meioambiente")
+      return "Economizar energia e reduzir lixo também faz muita diferença.";
+    if(lastTopic==="praca")
+      return "A praça também ajuda na socialização e na saúde mental.";
+    return "Sobre qual assunto você quer que eu continue? 🌿";
+  }
+
+  /* ===== CUMPRIMENTOS ===== */
   if(/\b(oi+|ola+|eai+|opa|salve|fala|hey|bom dia|boa tarde|boa noite)\b/.test(q)){
     r=[
       "Oi! 😄 Em que posso ajudar?",
       "E aí! 🌱 Bora aprender algo?",
       "Olá! 🌿 Pergunta aí!",
-      "Salve! 😎 Manda a dúvida!"
+      "Salve! 😎 Manda a dúvida!",
+      "Oi! Quer saber algo sobre a praça ou natureza?"
     ];
     return r[Math.floor(Math.random()*r.length)];
   }
 
-  if(q.includes("auria") || q.includes("quem e voce"))
-    return "Sou a Auria 🌿, assistente ambiental do portal.";
+  /* ===== IDENTIDADE ===== */
+  if(q.includes("auria") || q.includes("quem e voce") || q.includes("quem é você"))
+    return "Sou a Auria 🌿, assistente ambiental do portal educativo da praça.";
 
-  if(q.includes("projeto") || q.includes("portal"))
-    return "Esse portal usa site e QR Codes na praça para educação ambiental.";
+  if(q.includes("criador") || q.includes("tiago"))
+    return "Fui criada por Tiago Santos do Carmo como parte de um projeto educacional 😄";
 
+  if(q.includes("portal") || q.includes("qrcode") || q.includes("qr"))
+    return "Os QR Codes levam para páginas com informações sobre árvores, jardins e história local.";
+
+  /* ===== PRAÇA ===== */
   if(q.includes("praca") || q.includes("parque")){
     lastTopic="praca";
     r=[
       "A praça é espaço de lazer e convivência.",
       "Ela ajuda a refrescar a cidade.",
-      "É ótima para atividades e descanso."
+      "É ótima para atividades, descanso e contato com a natureza.",
+      "Praças melhoram a qualidade de vida da população."
     ];
     return r[Math.floor(Math.random()*r.length)];
   }
 
+  if(q.includes("lixo") || q.includes("sujeira")){
+    lastTopic="praca";
+    return "Manter a praça limpa protege animais e evita doenças.";
+  }
+
+  /* ===== ÁRVORES ===== */
   if(q.includes("ipe")){
     lastTopic="arvores";
-    return "O Ipê Amarelo floresce no inverno e é símbolo do Brasil.";
+    return "O Ipê Amarelo floresce no inverno e é símbolo do Brasil 🇧🇷";
+  }
+
+  if(q.includes("plantar") && q.includes("arvore")){
+    lastTopic="arvores";
+    return "Plantar árvores ajuda no clima, na sombra e na qualidade do ar.";
+  }
+
+  if(q.includes("raiz")){
+    lastTopic="arvores";
+    return "As raízes ajudam a segurar o solo e evitam erosão.";
   }
 
   if(q.includes("arvore")){
     lastTopic="arvores";
-    return "Árvores melhoram o clima, o ar e ajudam os animais.";
+    return "Árvores melhoram o clima, o ar e ajudam os animais. Quer saber sobre alguma espécie?";
   }
 
-  if(q.includes("japones") || q.includes("zen")){
+  /* ===== JARDINS ===== */
+  if(q.includes("japones") || q.includes("oriental") || q.includes("zen")){
     lastTopic="jardins";
-    return "Jardins japoneses buscam equilíbrio e tranquilidade.";
+    return "Jardins japoneses buscam equilíbrio usando pedras, água e plantas.";
+  }
+
+  if(q.includes("europeu")){
+    lastTopic="jardins";
+    return "Jardins europeus são mais simétricos e organizados, com caminhos bem definidos.";
+  }
+
+  if(q.includes("tropical")){
+    lastTopic="jardins";
+    return "Jardins tropicais usam plantas grandes, cores fortes e muita sombra.";
   }
 
   if(/\b(jardim|jardins)\b/.test(q)){
     lastTopic="jardins";
-    return "Existem jardins japonês, europeu e tropical. Qual quer conhecer?";
+    return "Existem jardins japonês, europeu e tropical. Qual você quer conhecer? 🌸";
+  }
+
+  /* ===== MEIO AMBIENTE ===== */
+  if(q.includes("reciclagem")){
+    lastTopic="meioambiente";
+    return "Reciclar reduz lixo e economiza recursos naturais.";
+  }
+
+  if(q.includes("agua")){
+    lastTopic="meioambiente";
+    return "Economizar água é essencial para o futuro do planeta.";
+  }
+
+  if(q.includes("clima") || q.includes("aquecimento")){
+    lastTopic="meioambiente";
+    return "Plantar árvores ajuda a reduzir o aquecimento das cidades.";
   }
 
   if(q.includes("meio ambiente") || q.includes("natureza")){
     lastTopic="meioambiente";
-    return "Cuidar do meio ambiente é cuidar do nosso futuro 🌍";
+    return "Cuidar do meio ambiente é cuidar do nosso futuro 🌍 Quer alguma dica prática?";
   }
 
-  if(q.includes("monumento")){
+  /* ===== MONUMENTOS ===== */
+  if(q.includes("historia")){
     lastTopic="monumentos";
-    return "Monumentos preservam a história da comunidade.";
+    return "A história ajuda a entender quem somos como comunidade.";
   }
 
-  if(q.includes("obrigado") || q.includes("valeu")){
+  if(q.includes("monumento") || q.includes("estatua")){
+    lastTopic="monumentos";
+    return "Monumentos preservam a história e a identidade cultural da cidade.";
+  }
+
+  /* ===== AGRADECIMENTOS ===== */
+  if(q.includes("obrigado") || q.includes("valeu") || q.includes("thanks")){
     r=[
       "De nada! 🌱",
       "Tamo junto 😄",
-      "Sempre por aqui!"
+      "Sempre por aqui!",
+      "Qualquer coisa é só chamar 🌿"
     ];
     return r[Math.floor(Math.random()*r.length)];
   }
 
+  /* ===== FALLBACK INTELIGENTE ===== */
   r=[
-    "Não entendi bem 🤔 tenta perguntar sobre natureza ou praça.",
-    "Pode reformular? Posso ajudar com meio ambiente 🌿",
-    "Ainda estou aprendendo 😅 mas sei bastante sobre paisagismo!"
+    "Hmm 🤔 não peguei bem… quer falar de jardins, árvores ou da praça?",
+    "Pode tentar de outro jeito? Posso ajudar com natureza 🌿",
+    "Ainda estou aprendendo 😅 mas sei bastante sobre paisagismo!",
+    "Não entendi, mas manda outra que a gente resolve 😄"
   ];
   return r[Math.floor(Math.random()*r.length)];
 }
+
 
 /* ===== ENVIO ===== */
 function sendMsg(){
